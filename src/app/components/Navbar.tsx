@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
-import Logo from "../../../public/silhouet_logo.png";
+
 
 export default function Navbar() { 
     return (
@@ -10,8 +9,7 @@ export default function Navbar() {
              
 
                 <Link href="/" className="flex items-center gap-3">
-                  <Image src={Logo} alt="Silhouet" className="font-semibold tracking-tight" width={50} height={50} />
-                <h1 className="text-lg font-bold text-accent-600">Silhouet</h1>
+                <h1 className="text-lg font-bold text-white">Silhouet</h1>
                 </Link>
                 
                 <nav className="flex items-center gap-4 text-sm">
