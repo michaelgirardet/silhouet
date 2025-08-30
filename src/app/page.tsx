@@ -1,6 +1,7 @@
 "use client";
 
 import { CheckCircle, ImageSquare } from "@phosphor-icons/react";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -18,18 +19,22 @@ export default function Home() {
 
         {/* Boutons : colonne sur mobile, ligne dès sm/md */}
         <div className="mt-6 flex flex-col sm:flex-row items-center sm:items-stretch justify-center md:justify-start gap-3 sm:gap-4">
-          <button
-            className="rounded bg-indigo px-6 py-3 font-semibold cursor-pointer text-white hover:bg-indigo/90 transition w-full sm:w-auto"
-            aria-label="Supprimer l'arrière plan"
-          >
-            Supprimer l&apos;arrière plan
-          </button>
-          <button
-            className="rounded bg-white px-6 py-3 font-semibold cursor-pointer text-black hover:bg-white/90 transition w-full sm:w-auto"
-            aria-label="Boite à outils"
-          >
-            Boite à outils
-          </button>
+          <Link href="/remove-bg" passHref>
+            <button
+              className="rounded bg-indigo px-6 py-3 w-[230px] md:min-w-0 font-semibold cursor-pointer text-white hover:bg-indigo/90 transition sm:w-auto"
+              aria-label="Supprimer l'arrière plan"
+            >
+              Supprimer l&apos;arrière plan
+            </button>
+          </Link>
+          <Link href="/tools" passHref>
+            <button
+              className="rounded bg-white px-6 py-3 font-semibold w-[230px] md:min-w-0 cursor-pointer text-black hover:bg-white/90 transition sm:w-auto"
+              aria-label="Boite à outils"
+            >
+              Boite à outils
+            </button>
+          </Link>
         </div>
 
         {/* Avantages : grille 2 colonnes, spacing adaptatif */}

@@ -10,15 +10,46 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
       role="button"
       tabIndex={0}
       onClick={() => inputRef.current?.click()}
-      onKeyDown={(e) => e.key === "Enter" && inputRef.current?.click()}
-      onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
+      onKeyDown={(e) =>
+        (e.key === "Enter" || e.key === " ") && inputRef.current?.click()
+      }
+      onDragOver={(e) => {
+        e.preventDefault();
+        setDrag(true);
+      }}
       onDragLeave={() => setDrag(false)}
-      onDrop={(e) => { e.preventDefault(); setDrag(false); const f = e.dataTransfer.files?.[0]; if (f) onFile(f); }}
-      className={`border border-border rounded-lg p-6 text-center transition ${drag ? "shadow-float border-accent-400" : "shadow-soft"}`}
+      onDrop={(e) => {
+        e.preventDefault();
+        setDrag(false);
+        const f = e.dataTransfer.files?.[0];
+        if (f) onFile(f);
+      }}
+      className={[
+        "border border-border border-dotted rounded-lg",
+        "w-full max-w-3xl mx-auto",
+        "min-h-[160px] sm:min-h-[190px] md:min-h-[220px]",
+        "p-5 sm:p-6 md:p-8 text-center",
+        "flex flex-col items-center justify-center",
+        "transition",
+        drag ? "shadow-float border-accent-400" : "shadow-soft",
+      ].join(" ")}
     >
-      <div className="font-medium">Dépose une image ou clique</div>
-      <div className="text-sm opacity-70 mt-1">PNG, JPG, WebP — &lt; 25MB</div>
-      <input ref={inputRef} type="file" accept="image/*" hidden onChange={(e)=>{const f=e.target.files?.[0]; if(f) onFile(f);}}/>
+      <div className="font-medium text-base sm:text-lg">
+        Déposez une image ou cliquez
+      </div>
+      <div className="text-xs sm:text-sm opacity-70 mt-1">
+        PNG, JPG, WebP — &lt; 25MB
+      </div>
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        hidden
+        onChange={(e) => {
+          const f = e.target.files?.[0];
+          if (f) onFile(f);
+        }}
+      />
     </div>
   );
 }
