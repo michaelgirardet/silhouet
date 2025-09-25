@@ -1,12 +1,23 @@
 "use client";
 
-import { CheckCircle, ImageSquare } from "@phosphor-icons/react";
+import { useRandomImage } from "@/lib/utils/useRandomImage";
+import { CheckCircleIcon, ImageSquareIcon } from "@phosphor-icons/react";
+import image1 from "../../public/hero_img_1.webp";
+import image2 from "../../public/hero_img_2.jpg";
+import image3 from "../../public/hero_img_3.jpg";
+import image4 from "../../public/hero_img_4.jpg";
+
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
+  const images = [image1, image2, image3, image4];
+  const randomImage = useRandomImage(images);
+
   return (
-    <section className="container mx-auto px-4 py-12 md:py-16 grid gap-10 md:grid-cols-2 items-center min-h-[70vh]">
-      <div className="text-center md:text-left">
+    <section className="container mx-auto px-4 py-12 md:py-16 grid gap-10 md:grid-cols-2 items-center justify-between min-h-[70vh]">
+      {/* Text on left  */}
+      <div className="text-center md:text-left h-full flex flex-col justify-between items-center">
         <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight mx-auto md:mx-0 max-w-2xl">
           Supprimez l&apos;arrière plan en un{" "}
           <span className="text-indigo">clic.</span>
@@ -37,21 +48,28 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* Avantages : grille 2 colonnes, spacing adaptatif */}
+        {/* Grille 2 colonnes, spacing adaptatif */}
         <div className="mt-8 grid grid-cols-2 gap-4 md:gap-6 text-sm text-muted-foreground max-w-md mx-auto md:mx-0">
           <div className="flex items-center gap-2">
-            <CheckCircle size={28} />
+            <CheckCircleIcon size={28} />
             <p className="m-0">Aucune donnée conservée</p>
           </div>
           <div className="flex items-center gap-2">
-            <ImageSquare size={28} />
+            <ImageSquareIcon size={28} />
             <p className="m-0">PNG transparent</p>
           </div>
         </div>
       </div>
 
-      {/* Colonne droite libre pour une image/preview plus tard */}
-      <div className="hidden md:block" />
+      {/* Image on right  */}
+      <div className="relative hidden md:block h-full w-full">
+        <Image
+          src={randomImage}
+          alt="Portrait d’une femme brune sur fond rose"
+          fill
+          className="rounded-xl object-cover "
+        />
+      </div>
     </section>
   );
 }
