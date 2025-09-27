@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -63,7 +64,6 @@ export default function RemoveBgPage() {
   const hasResult = useMemo(() => !!(srcURL && outURL), [srcURL, outURL]);
 
   const openModale = () => {
-    hasResult;
     setOpen(true);
   };
 
@@ -71,7 +71,7 @@ export default function RemoveBgPage() {
     <section className="container mx-auto px-4 py-10 md:py-14 grid gap-8 md:gap-10 md:grid-cols-2">
       <div className="rounded-lg text-center md:text-left text-2xl p-6 shadow-soft">
         <h1 className="text-3xl sm:text-4xl font-bold mb-1">
-          Remove Background
+          Détourage d&apos;images
         </h1>
         <p className="opacity-80 text-base sm:text-lg">
           Détourez vos images facilement et sans restriction.
