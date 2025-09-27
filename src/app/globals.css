@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
 
 @theme {
   --color-black: #050e0e;
   --color-indigo: #a172fd;
-  --color-magnolia: #f2ebff
+  --color-magnolia: #f2ebff;
 }
 
 body {
@@ -12,5 +12,90 @@ body {
   color: #050e0e;
   font-family: "Inter", sans-serif;
 }
-::selection { background: color-mix(in oklab, var(--color-accent-400) 25%, transparent); }
-*:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+::selection {
+  background: color-mix(in oklab, var(--color-accent-400) 25%, transparent);
+}
+*:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.loader {
+  display: block;
+  position: relative;
+  height: 12px;
+  width: 80%;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#hero-title {
+  animation: moveright 0.8s ease-out;
+}
+
+.moveup {
+  animation: moveup 0.6s ease-out;
+}
+
+.moveleft {
+  animation: moveleft 1.5s ease-out;
+}
+
+/* Hero  Title  */
+@keyframes moveright {
+  0% {
+    transform: translateX(-15%);
+    opacity: 0%;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 100%;
+  }
+}
+
+@keyframes moveup {
+  0% {
+    transform: translateY(20%);
+    opacity: 0%;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 100%;
+  }
+}
+
+@keyframes moveleft {
+  0% {
+    transform: translateX(0%);
+    opacity: 0%;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 100%;
+  }
+}
+
+/* Barre de loading  */
+@keyframes animloader {
+  0% {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  25% {
+    left: 25;
+    transform: translateX(-75%);
+  }
+  50% {
+    left: 50;
+    transform: translateX(-50%);
+  }
+  75% {
+    left: 75;
+    transform: translateX(-25%);
+  }
+  100% {
+    left: 100%;
+    transform: translateX(0%);
+  }
+}

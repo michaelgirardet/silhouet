@@ -1,10 +1,8 @@
-
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -13,18 +11,22 @@ export const metadata: Metadata = {
   description: "Reveal the form, forget the background.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="fr" className={inter.variable} suppressHydrationWarning>
       <body>
-          <div className="min-h-screen bg-bg text-fg">
-            <Navbar />
-            <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
-            <Footer />
-          </div>
+        <div className="min-h-screen">
+          <Navbar />
+          <main className="mx-auto max-w-6xl min-h-[calc(100vh_-_20vh)]">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
 }
-
-

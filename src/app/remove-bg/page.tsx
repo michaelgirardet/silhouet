@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -5,6 +6,8 @@ import Dropzone from "@/app/components/Dropzone";
 import Modal from "@/app/components/Modal";
 import { downscaleImage, fileFromBlob } from "@/lib/image";
 import Image from "next/image";
+import Loader from "../components/Loader";
+import { DownloadSimpleIcon } from "@phosphor-icons/react";
 
 type RemoveBackgroundFn = (file: Blob | File, opts?: any) => Promise<Blob>;
 
@@ -60,11 +63,15 @@ export default function RemoveBgPage() {
 
   const hasResult = useMemo(() => !!(srcURL && outURL), [srcURL, outURL]);
 
+  const openModale = () => {
+    setOpen(true);
+  };
+
   return (
     <section className="container mx-auto px-4 py-10 md:py-14 grid gap-8 md:gap-10 md:grid-cols-2">
       <div className="rounded-lg text-center md:text-left text-2xl p-6 shadow-soft">
         <h1 className="text-3xl sm:text-4xl font-bold mb-1">
-          Remove Background
+          Détourage d&apos;images
         </h1>
         <p className="opacity-80 text-base sm:text-lg">
           Détourez vos images facilement et sans restriction.
@@ -75,13 +82,9 @@ export default function RemoveBgPage() {
       <div className="md:col-span-2">
         <Dropzone onFile={process} />
       </div>
-
-      {busy && (
-        <div className="md:col-span-2 rounded-md p-3 bg-muted border border-border text-sm">
-          Chargement du modèle / traitement… (le premier lancement peut être
-          plus long)
-        </div>
-      )}
+      <div className="flex items-center justify-center">
+        {busy && <Loader />}
+      </div>
 
       {error && (
         <div className="md:col-span-2 rounded-md p-3 border border-border text-sm text-[color:var(--color-danger,oklch(0.6_0.2_25))]">
@@ -89,7 +92,7 @@ export default function RemoveBgPage() {
         </div>
       )}
 
-      {/* Vignettes: 1 col sur mobile, 2 cols dès sm */}
+      {/* Vignettes de résultat*/}
       {srcURL && (
         <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
@@ -112,9 +115,10 @@ export default function RemoveBgPage() {
                 <Image
                   src={outURL}
                   alt="résultat"
-                  className="block w-full h-auto rounded-md"
+                  className="block w-full h-auto rounded-md cursor-pointer"
                   width={800}
                   height={800}
+                  onClick={() => openModale()}
                 />
               </div>
             </div>
@@ -122,6 +126,7 @@ export default function RemoveBgPage() {
         </div>
       )}
 
+      {/* Modale de résultat  */}
       <Modal
         open={open && hasResult}
         onClose={() => setOpen(false)}
@@ -132,19 +137,20 @@ export default function RemoveBgPage() {
               <a
                 href={outURL}
                 download="silhouet-no-bg.png"
-                className="bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-md shadow-soft transition-colors"
+                className="bg-accent-500 hover:bg-accent-600 text-black px-4 py-2 rounded-md shadow-soft transition-colors flex cursor-pointer"
               >
-                ⬇️ Télécharger le PNG
+                <DownloadSimpleIcon size={32} />
+                Télécharger le PNG
               </a>
             )}
             <button
-              className="px-4 py-2 rounded-md border border-border hover:bg-muted transition-colors"
+              className="px-4 py-2 rounded-md border border-indigo/80 hover:bg-muted transition-colors cursor-pointer hover:bg-indigo/20"
               onClick={() => setOpen(false)}
             >
               Fermer
             </button>
             <button
-              className="px-4 py-2 rounded-md border border-border"
+              className="px-4 py-2 rounded-md border border-border cursor-pointer"
               onClick={() => {
                 setSrcURL(null);
                 setOutURL(null);
@@ -163,6 +169,7 @@ export default function RemoveBgPage() {
               src={outURL}
               alt="Prévisualisation résultat"
               className="block max-h-[70vh] w-auto mx-auto rounded"
+              id="result-image"
               width={800}
               height={800}
             />
