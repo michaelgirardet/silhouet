@@ -16,7 +16,6 @@ export default function Home() {
 
   return (
     <section className="container mx-auto px-4 py-12 md:py-16 grid gap-10 md:grid-cols-2 items-center justify-between min-h-[70vh]">
-      {/* Text on left  */}
       <div className="text-center md:text-left h-full flex flex-col justify-between items-center">
         <h1
           className="font-bold text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight mx-auto md:mx-0 max-w-2xl"
@@ -27,11 +26,9 @@ export default function Home() {
         </h1>
 
         <h2 className="moveup mt-3 md:mt-4 text-base md:text-xl text-muted-foreground mx-auto md:mx-0 max-w-2xl">
-          Outil d&apos;image minimal et élégant : détourage, conversion et
-          compression
+          Outil d&apos;image minimal et élégant : supprimez l&apos;arrière plan
+          et convertissez dans vos formats favoris.
         </h2>
-
-        {/* Boutons : colonne sur mobile, ligne dès sm/md */}
         <div className="moveup mt-6 flex flex-col sm:flex-row items-center sm:items-stretch justify-center md:justify-start gap-3 sm:gap-4">
           <Link href="/remove-bg" passHref>
             <button
@@ -44,14 +41,13 @@ export default function Home() {
           <Link href="/tools" passHref>
             <button
               className="rounded bg-white px-6 py-3 font-semibold w-[230px] md:min-w-0 cursor-pointer text-black hover:bg-white/90 transition sm:w-auto"
-              aria-label="Boite à outils"
+              aria-label="Convertir une image"
             >
-              Boite à outils
+              Convertir
             </button>
           </Link>
         </div>
 
-        {/* Grille 2 colonnes, spacing adaptatif */}
         <div className="moveup mt-8 grid grid-cols-2 gap-4 md:gap-6 text-sm text-muted-foreground max-w-md mx-auto md:mx-0">
           <div className="flex items-center gap-2">
             <CheckCircleIcon size={28} />

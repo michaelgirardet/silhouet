@@ -35,7 +35,7 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
       ].join(" ")}
     >
       <div className="font-medium text-base sm:text-lg">
-        Déposez une image ou cliquez
+        Glissez votre image ici
       </div>
       <div className="text-xs sm:text-sm opacity-70 mt-1">
         PNG, JPG, WebP — &lt; 25MB
