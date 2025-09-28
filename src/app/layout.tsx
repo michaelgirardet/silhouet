@@ -19,11 +19,9 @@ export default function RootLayout({
   return (
     <html lang="fr" className={inter.variable} suppressHydrationWarning>
       <body>
-        <div className="min-h-screen">
+        <div className="min-h-screen flex flex-col justify-between">
           <Navbar />
-          <main className="mx-auto max-w-6xl min-h-[calc(100vh_-_20vh)]">
-            {children}
-          </main>
+          <main className="mx-auto max-w-6xl">{children}</main>
           <Footer />
         </div>
       </body>
