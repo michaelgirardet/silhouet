@@ -84,7 +84,7 @@ export default function Modal({
           <button
             ref={firstFocusRef}
             onClick={onClose}
-            className="px-3 py-1.5 rounded-md text-white font-bold bg-indigo/10 cursor-pointer border border-border "
+            className="px-3 py-1.5 rounded-full text-white font-bold bg-red-500/80 cursor-pointer "
           >
             ✕
           </button>

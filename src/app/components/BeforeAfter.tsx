@@ -9,7 +9,7 @@ export default function BeforeAfter({
   before: string;
   after: string;
 }) {
-  const [v, setV] = useState(50); // pourcentage visible de "after"
+  const [v, setV] = useState(50);
   const wrapRef = useRef<HTMLDivElement>(null);
 
   const setFromEvent = useCallback((clientX: number) => {
@@ -24,9 +24,7 @@ export default function BeforeAfter({
     <div
       ref={wrapRef}
       className="relative overflow-hidden rounded-xl border border-border shadow-soft"
-      // ratio fluide : laisse l'image piloter la hauteur via h-auto
     >
-      {/* Image AVANT (fond) */}
       <Image
         src={before}
         alt="avant"
@@ -37,7 +35,6 @@ export default function BeforeAfter({
         priority={false}
       />
 
-      {/* Calque APRES (masqué par largeur) */}
       <div
         className="absolute inset-0 overflow-hidden border-r border-border transition-[width] duration-150"
         style={{ width: `${v}%` }}
@@ -54,7 +51,6 @@ export default function BeforeAfter({
         />
       </div>
 
-      {/* Poignée/guide centrale (meilleure affordance) */}
       <div
         className="pointer-events-none absolute inset-y-0"
         style={{ left: `calc(${v}% - 1px)` }}
@@ -86,8 +82,6 @@ export default function BeforeAfter({
           if (t) setFromEvent(t.clientX);
         }}
       />
-
-      {/* Range accessible (clavier) + stylé comme le site */}
       <input
         type="range"
         min={0}

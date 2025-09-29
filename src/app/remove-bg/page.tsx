@@ -83,13 +83,13 @@ export default function RemoveBgPage() {
       <div className="md:col-span-2">
         <Dropzone onFile={process} />
       </div>
-      <div className="flex items-center justify-center">
+      <div className="flex w-full items-center justify-center">
         {busy && <Loader />}
       </div>
 
       {error && (
         <div className="md:col-span-2 rounded-md p-3 border border-border text-sm text-[color:var(--color-danger,oklch(0.6_0.2_25))]">
-          {error}
+          <p>Une erreur est survenue</p>
         </div>
       )}
 
@@ -138,20 +138,20 @@ export default function RemoveBgPage() {
               <a
                 href={outURL}
                 download="silhouet-no-bg.png"
-                className="bg-accent-500 hover:bg-accent-600 text-black px-4 py-2 rounded-md shadow-soft transition-colors flex cursor-pointer"
+                className="bg-indigo text-white font-medium gap-4 items-center justify-center text-sm md:text-md hover:bg-accent-600 px-4 py-2 rounded-md shadow-soft transition-colors flex cursor-pointer"
               >
-                <DownloadSimpleIcon size={32} />
+                <DownloadSimpleIcon size={24} />
                 Télécharger le PNG
               </a>
             )}
             <button
-              className="px-4 py-2 rounded-md border border-indigo/80 hover:bg-muted transition-colors cursor-pointer hover:bg-indigo/20"
+              className="px-4 py-2 rounded-md border font-medium gap-4 items-center justify-center text-sm md:text-md border-indigo/80 transition-colors cursor-pointer hover:bg-indigo/20"
               onClick={() => setOpen(false)}
             >
               Fermer
             </button>
             <button
-              className="px-4 py-2 rounded-md border border-border cursor-pointer"
+              className="px-4 py-2 rounded-md border border-border cursor-pointer font-medium gap-4 items-center justify-center text-sm md:text-md"
               onClick={() => {
                 setSrcURL(null);
                 setOutURL(null);

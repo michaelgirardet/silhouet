@@ -19,7 +19,7 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav className="flex items-center gap-4 md:gap-8 text-md md:text-lg font-medium ">
+        <nav className="flex items-center gap-4 md:gap-8 text-sm md:text-md font-medium ">
           <a
             href="/remove-bg"
             className={`hover:opacity-80 bg-white px-4 py-2 rounded-full   ${
