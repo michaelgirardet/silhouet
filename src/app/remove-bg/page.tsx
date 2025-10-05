@@ -7,7 +7,7 @@ import Modal from "@/app/components/Modal";
 import { downscaleImage, fileFromBlob } from "@/lib/image";
 import Image from "next/image";
 import Loader from "../components/Loader";
-import { DownloadSimpleIcon } from "@phosphor-icons/react";
+import { DownloadSimpleIcon, RepeatIcon } from "@phosphor-icons/react";
 
 type RemoveBackgroundFn = (file: Blob | File, opts?: any) => Promise<Blob>;
 
@@ -138,20 +138,14 @@ export default function RemoveBgPage() {
               <a
                 href={outURL}
                 download="silhouet-no-bg.png"
-                className="bg-indigo md:text-md hover:bg-accent-600 shadow-soft flex cursor-pointer items-center justify-center gap-4 rounded-md px-4 py-2 text-sm font-medium text-white transition-colors"
+                className="bg-indigo md:text-md hover:bg-indigo/80 flex cursor-pointer items-center justify-center gap-4 rounded-md px-4 py-2 text-sm font-medium text-white transition duration-300 ease-in-out hover:shadow-sm"
               >
                 <DownloadSimpleIcon size={24} />
                 Télécharger le PNG
               </a>
             )}
             <button
-              className="md:text-md border-indigo/80 hover:bg-indigo/20 cursor-pointer items-center justify-center gap-4 rounded-md border px-4 py-2 text-sm font-medium transition-colors"
-              onClick={() => setOpen(false)}
-            >
-              Fermer
-            </button>
-            <button
-              className="border-border md:text-md cursor-pointer items-center justify-center gap-4 rounded-md border px-4 py-2 text-sm font-medium"
+              className="md:text-md hover:text-indigo flex cursor-pointer items-center justify-center gap-4 rounded-md border border-none bg-white px-4 py-2 text-sm font-medium"
               onClick={() => {
                 setSrcURL(null);
                 setOutURL(null);
@@ -159,7 +153,7 @@ export default function RemoveBgPage() {
                 setOpen(false);
               }}
             >
-              ↺ Recommencer
+              <RepeatIcon size={24} /> Recommencer
             </button>
           </>
         }
