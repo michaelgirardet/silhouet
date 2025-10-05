@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import LogoSilhouet from "../../../public/icons/silhouet.png";
+import LogoSilhouet from "../../../public/icons/icon.webp";
 
 export default function Navbar() {
   const pathname = usePathname();

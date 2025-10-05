@@ -2,10 +2,10 @@
 
 import { useRandomImage } from "@/lib/utils/useRandomImage";
 import { CheckCircleIcon, ImageSquareIcon } from "@phosphor-icons/react";
-import image1 from "../../public/hero_img_1.webp";
-import image2 from "../../public/hero_img_2.jpg";
-import image3 from "../../public/hero_img_3.jpg";
-import image4 from "../../public/hero_img_4.jpg";
+import image1 from "../../public/images/hero_img_1.webp";
+import image2 from "../../public/images/hero_img_2.webp";
+import image3 from "../../public/images/hero_img_3.webp";
+import image4 from "../../public/images/hero_img_4.webp";
 
 import Image from "next/image";
 import Link from "next/link";
