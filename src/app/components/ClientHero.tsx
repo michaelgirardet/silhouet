@@ -14,7 +14,7 @@ export default function ClientHero({ src, alt, ...imgProps }: Props) {
   };
 
   return (
-    <div className="relative hidden md:block h-full w-full">
+    <div className="relative hidden h-full w-full md:block">
       <Image
         src={src}
         alt={alt}
