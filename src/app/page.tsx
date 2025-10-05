@@ -9,14 +9,14 @@ export default function Home() {
     <section className="container mx-auto grid min-h-[70vh] items-center justify-between gap-10 px-4 py-12 md:grid-cols-2 md:py-16">
       <div className="flex h-full flex-col items-center justify-between text-center md:text-left">
         <h1
-          className="mx-auto max-w-2xl text-4xl leading-tight font-bold tracking-tight md:mx-0 md:text-5xl lg:text-6xl"
+          className="text-mauve mx-auto max-w-2xl text-4xl leading-tight font-bold tracking-tight md:mx-0 md:text-5xl lg:text-6xl"
           id="hero-title"
         >
           Supprimez l&apos;arrière plan de vos images en un{" "}
           <span className="text-indigo">clic</span>.
         </h1>
 
-        <h2 className="moveup text-muted-foreground mx-auto mt-3 max-w-2xl text-base md:mx-0 md:mt-4 md:text-xl">
+        <h2 className="moveup text-mauve mx-auto mt-3 max-w-2xl text-base md:mx-0 md:mt-4 md:text-xl">
           Obtenez un fond transparent instantanément et convertissez vos images
           en WebP pour un web plus rapide — sans perdre en qualité.
         </h2>
@@ -33,7 +33,7 @@ export default function Home() {
           <Link href="/convert" passHref>
             <button
               type="button"
-              className="hover:text-indigo w-[230px] cursor-pointer rounded-full bg-white px-6 py-3 font-semibold text-black shadow-sm transition duration-300 ease-in-out sm:w-auto md:min-w-0"
+              className="hover:text-indigo text-mauve w-[230px] cursor-pointer rounded-full bg-white px-6 py-3 font-semibold shadow-sm transition duration-300 ease-in-out sm:w-auto md:min-w-0"
               aria-label="Convertir une image"
             >
               Convertir

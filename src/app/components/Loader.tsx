@@ -4,7 +4,7 @@ export default function Loader() {
       <button
         disabled
         type="button"
-        className="borderpx-5 inline-flex items-center rounded-lg py-2.5 text-sm font-medium text-black"
+        className="borderpx-5 text-mauve inline-flex items-center rounded-lg py-2.5 text-sm font-medium"
       >
         <svg
           aria-hidden="true"
