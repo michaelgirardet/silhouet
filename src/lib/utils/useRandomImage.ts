@@ -1,7 +1,7 @@
 import { StaticImageData } from "next/image";
 import { useMemo } from "react";
 
-export function useRandomImage(sources: StaticImageData[] | string) {
+export function useRandomImage(sources: readonly (string | StaticImageData)[]) {
   return useMemo(() => {
     const index = Math.floor(Math.random() * sources.length);
     return sources[index];

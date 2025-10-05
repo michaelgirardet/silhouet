@@ -2,16 +2,17 @@
 
 import { useRandomImage } from "@/lib/utils/useRandomImage";
 import { CheckCircleIcon, ImageSquareIcon } from "@phosphor-icons/react";
-import image1 from "../../public/images/hero_img_1.webp";
-import image2 from "../../public/images/hero_img_2.webp";
-import image3 from "../../public/images/hero_img_3.webp";
-import image4 from "../../public/images/hero_img_4.webp";
 
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
-  const images = [image1, image2, image3, image4];
+  const images = [
+    "/images/hero_img_1.webp",
+    "/images/hero_img_2.webp",
+    "/images/hero_img_3.webp",
+    "/images/hero_img_4.webp",
+  ] as const;
   const randomImage = useRandomImage(images);
 
   return (
@@ -33,7 +34,7 @@ export default function Home() {
           <Link href="/remove-bg" passHref>
             <button
               type="button"
-              className="bg-indigo hover:bg-indigo/90 w-[230px] cursor-pointer rounded-full px-6 py-3 font-semibold text-white transition sm:w-auto md:min-w-0"
+              className="bg-indigo hover:bg-indigo/80 w-[230px] cursor-pointer rounded-full px-6 py-3 font-semibold text-white shadow-sm transition duration-300 ease-in-out sm:w-auto md:min-w-0"
               aria-label="Supprimer l'arrière plan"
             >
               Supprimer l&apos;arrière plan
@@ -42,7 +43,7 @@ export default function Home() {
           <Link href="/tools" passHref>
             <button
               type="button"
-              className="w-[230px] cursor-pointer rounded-full bg-white px-6 py-3 font-semibold text-black transition hover:bg-white/90 sm:w-auto md:min-w-0"
+              className="w-[230px] cursor-pointer rounded-full bg-white px-6 py-3 font-semibold text-black shadow-sm transition duration-300 ease-in-out hover:bg-white/110 sm:w-auto md:min-w-0"
               aria-label="Convertir une image"
             >
               Convertir
@@ -53,11 +54,11 @@ export default function Home() {
         <div className="moveup text-muted-foreground mx-auto mt-8 grid max-w-md grid-cols-2 gap-4 text-sm md:mx-0 md:gap-6">
           <div className="flex items-center gap-2">
             <CheckCircleIcon size={28} />
-            <p className="m-0">Aucune donnée conservée</p>
+            <p>Aucune donnée conservée</p>
           </div>
           <div className="flex items-center gap-2">
             <ImageSquareIcon size={28} />
-            <p className="m-0">PNG transparent</p>
+            <p>PNG transparent</p>
           </div>
         </div>
       </div>
