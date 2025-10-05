@@ -80,6 +80,7 @@ export default function Modal({
         <div className="bg-indigo border-border flex items-center justify-between rounded-t-2xl p-4 text-white md:p-5">
           <div className="text-base font-semibold md:text-lg">{title}</div>
           <button
+            type="button"
             ref={firstFocusRef}
             onClick={onClose}
             className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full font-bold text-white transition duration-300 ease-in-out hover:border"
@@ -88,10 +89,7 @@ export default function Modal({
           </button>
         </div>
 
-        <div
-          className="bg- max-h-[70vh] overflow-auto p-4 md:p-5"
-          id="bg-background-remover"
-        >
+        <div className="bg-background-remover max-h-[70vh] overflow-auto p-4 md:p-5">
           {children}
         </div>
 

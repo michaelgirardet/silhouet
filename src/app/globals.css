@@ -31,7 +31,7 @@ body {
   overflow: hidden;
 }
 
-#hero-title {
+.hero-title {
   animation: moveright 0.8s ease-out;
 }
 
@@ -43,7 +43,7 @@ body {
   animation: moveleft 1.5s ease-out;
 }
 
-#bg-background-remover {
+.bg-background-remover {
   background-image: url("/images/bg_transparent.webp");
   background-repeat: repeat;
   background-size: contain;

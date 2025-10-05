@@ -1,10 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -23,7 +22,9 @@ export default function RootLayout({
       <body>
         <div className="flex min-h-screen flex-col justify-between">
           <Navbar />
-          <main className="mx-auto max-w-6xl">{children}</main>
+          <main className="mx-auto max-w-6xl">
+            {children} <Analytics />
+          </main>
           <Footer />
         </div>
       </body>
