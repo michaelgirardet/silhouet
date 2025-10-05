@@ -28,7 +28,7 @@ export default function RemoveBgPage() {
           })
           .catch(() => {});
       },
-      { timeout: 1500 }
+      { timeout: 1500 },
     );
     return () => id && (window as any).cancelIdleCallback?.(id);
   }, []);
@@ -68,12 +68,12 @@ export default function RemoveBgPage() {
   };
 
   return (
-    <section className="container mx-auto px-4 py-10 md:py-14 grid gap-8 md:gap-10 md:grid-cols-2">
-      <div className="rounded-lg text-center md:text-left text-2xl p-6 shadow-soft">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-1">
+    <section className="container mx-auto grid gap-8 px-4 py-10 md:grid-cols-2 md:gap-10 md:py-14">
+      <div className="shadow-soft rounded-lg p-6 text-center text-2xl md:text-left">
+        <h1 className="mb-1 text-3xl font-bold sm:text-4xl">
           Supprimer l&apos;arrière plan
         </h1>
-        <p className="opacity-80 text-base sm:text-lg">
+        <p className="text-base opacity-80 sm:text-lg">
           Supprimez l&apos;arrière plan de vos images facilement et sans
           restriction.
         </p>
@@ -88,20 +88,20 @@ export default function RemoveBgPage() {
       </div>
 
       {error && (
-        <div className="md:col-span-2 rounded-md p-3 border border-border text-sm text-[color:var(--color-danger,oklch(0.6_0.2_25))]">
+        <div className="border-border rounded-md border p-3 text-sm text-[color:var(--color-danger,oklch(0.6_0.2_25))] md:col-span-2">
           <p>Une erreur est survenue</p>
         </div>
       )}
 
       {/* Vignettes de résultat*/}
       {srcURL && (
-        <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:col-span-2">
           <div>
-            <div className="text-sm font-medium mb-1 opacity-80">Source</div>
+            <div className="mb-1 text-sm font-medium opacity-80">Source</div>
             <Image
               src={srcURL}
               alt="source"
-              className="block w-full h-auto rounded-lg border border-border"
+              className="border-border block h-auto w-full rounded-lg border"
               width={800}
               height={800}
               priority
@@ -109,14 +109,14 @@ export default function RemoveBgPage() {
           </div>
           {outURL && (
             <div>
-              <div className="text-sm font-medium mb-1 opacity-80">
+              <div className="mb-1 text-sm font-medium opacity-80">
                 Résultat
               </div>
-              <div className="u-checker rounded-lg border border-border p-2">
+              <div className="u-checker border-border rounded-lg border p-2">
                 <Image
                   src={outURL}
                   alt="résultat"
-                  className="block w-full h-auto rounded-md cursor-pointer"
+                  className="block h-auto w-full cursor-pointer rounded-md"
                   width={800}
                   height={800}
                   onClick={() => openModale()}
@@ -138,20 +138,20 @@ export default function RemoveBgPage() {
               <a
                 href={outURL}
                 download="silhouet-no-bg.png"
-                className="bg-indigo text-white font-medium gap-4 items-center justify-center text-sm md:text-md hover:bg-accent-600 px-4 py-2 rounded-md shadow-soft transition-colors flex cursor-pointer"
+                className="bg-indigo md:text-md hover:bg-accent-600 shadow-soft flex cursor-pointer items-center justify-center gap-4 rounded-md px-4 py-2 text-sm font-medium text-white transition-colors"
               >
                 <DownloadSimpleIcon size={24} />
                 Télécharger le PNG
               </a>
             )}
             <button
-              className="px-4 py-2 rounded-md border font-medium gap-4 items-center justify-center text-sm md:text-md border-indigo/80 transition-colors cursor-pointer hover:bg-indigo/20"
+              className="md:text-md border-indigo/80 hover:bg-indigo/20 cursor-pointer items-center justify-center gap-4 rounded-md border px-4 py-2 text-sm font-medium transition-colors"
               onClick={() => setOpen(false)}
             >
               Fermer
             </button>
             <button
-              className="px-4 py-2 rounded-md border border-border cursor-pointer font-medium gap-4 items-center justify-center text-sm md:text-md"
+              className="border-border md:text-md cursor-pointer items-center justify-center gap-4 rounded-md border px-4 py-2 text-sm font-medium"
               onClick={() => {
                 setSrcURL(null);
                 setOutURL(null);
@@ -169,7 +169,7 @@ export default function RemoveBgPage() {
             <Image
               src={outURL}
               alt="Prévisualisation résultat"
-              className="block max-h-[70vh] w-auto mx-auto rounded"
+              className="mx-auto block max-h-[70vh] w-auto rounded"
               id="result-image"
               width={800}
               height={800}

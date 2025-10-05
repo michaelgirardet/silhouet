@@ -30,7 +30,7 @@ export default function Modal({
         const root = dialogRef.current;
         if (!root) return;
         const focusables = root.querySelectorAll<HTMLElement>(
-          'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+          'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])',
         );
         if (!focusables.length) return;
         const first = focusables[0];
@@ -63,7 +63,7 @@ export default function Modal({
   return createPortal(
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center bg-black/10 justify-center p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 p-4"
       onMouseDown={(e) => {
         if (e.target === overlayRef.current) onClose();
       }}
@@ -74,33 +74,30 @@ export default function Modal({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="
-          relative w-full bg-magnolia max-w-3xl text-lg rounded-xl border/20 shadow-2xl
-          animate-in fade-in duration-150
-        "
+        className="bg-magnolia border/20 animate-in fade-in relative w-full max-w-3xl rounded-xl text-lg shadow-2xl duration-150"
       >
-        <div className="flex items-center justify-between rounded-t-2xl text-white p-4 md:p-5 bg-indigo border-border">
-          <div className="font-semibold text-base md:text-lg">{title}</div>
+        <div className="bg-indigo border-border flex items-center justify-between rounded-t-2xl p-4 text-white md:p-5">
+          <div className="text-base font-semibold md:text-lg">{title}</div>
           <button
             ref={firstFocusRef}
             onClick={onClose}
-            className="px-3 py-1.5 rounded-full text-white font-bold bg-red-500/80 cursor-pointer "
+            className="cursor-pointer rounded-full bg-red-500/80 px-3 py-1.5 font-bold text-white"
           >
             ✕
           </button>
         </div>
 
-        <div className="p-4 md:p-5 max-h-[70vh] overflow-auto bg-white">
+        <div className="max-h-[70vh] overflow-auto bg-white p-4 md:p-5">
           {children}
         </div>
 
         {footer && (
-          <div className="p-4 md:p-5 border-t border-border flex flex-col sm:flex-row gap-2 sm:justify-end">
+          <div className="border-border flex flex-col gap-2 border-t p-4 sm:flex-row sm:justify-end md:p-5">
             {footer}
           </div>
         )}
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }

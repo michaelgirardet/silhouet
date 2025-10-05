@@ -26,19 +26,19 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
         if (f) onFile(f);
       }}
       className={[
-        "border border-border border-dotted rounded-lg",
-        "w-full max-w-3xl mx-auto",
+        "border-border rounded-lg border border-dotted",
+        "mx-auto w-full max-w-3xl",
         "min-h-[160px] sm:min-h-[190px] md:min-h-[220px]",
-        "p-5 sm:p-6 md:p-8 text-center",
+        "p-5 text-center sm:p-6 md:p-8",
         "flex flex-col items-center justify-center",
         "transition",
         drag ? "shadow-float border-accent-400" : "shadow-soft",
       ].join(" ")}
     >
-      <div className="font-medium text-base sm:text-lg">
+      <div className="text-base font-medium sm:text-lg">
         Glissez votre image ici
       </div>
-      <div className="text-xs sm:text-sm opacity-70 mt-1">
+      <div className="mt-1 text-xs opacity-70 sm:text-sm">
         PNG, JPG, WebP — &lt; 25MB
       </div>
       <input
