@@ -1,17 +1,14 @@
 "use client";
 
-import BeforeAfterSlider from "./components/BeforeAfterSlider";
 import { CheckCircleIcon, ImageSquareIcon } from "@phosphor-icons/react";
 import Link from "next/link";
+import BeforeAfterSlider from "./components/BeforeAfterSlider";
 
 export default function Home() {
   return (
     <section className="container mx-auto grid min-h-[70vh] items-center justify-between gap-10 px-4 py-12 md:grid-cols-2 md:py-16">
       <div className="flex h-full flex-col items-center justify-between text-center md:text-left">
-        <h1
-          className="text-mauve mx-auto max-w-2xl text-4xl leading-tight font-bold tracking-tight md:mx-0 md:text-5xl lg:text-6xl"
-          id="hero-title"
-        >
+        <h1 className="hero-title text-mauve mx-auto max-w-2xl text-4xl leading-tight font-bold tracking-tight md:mx-0 md:text-5xl lg:text-6xl">
           Supprimez l&apos;arrière plan de vos images en un{" "}
           <span className="text-indigo">clic</span>.
         </h1>

@@ -4,25 +4,25 @@
 import Image, { type ImageProps } from "next/image";
 
 type Props = {
-  src: ImageProps["src"];
-  alt: string;
+	src: ImageProps["src"];
+	alt: string;
 } & Omit<ImageProps, "src" | "alt">;
 
 export default function ClientHero({ src, alt, ...imgProps }: Props) {
-  const handleClickOnImage = () => {
-    console.log("Image cliquée !");
-  };
+	const handleClickOnImage = () => {
+		console.log("Image cliquée !");
+	};
 
-  return (
-    <div className="relative hidden h-full w-full md:block">
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        className="rounded-xl object-cover"
-        onClick={handleClickOnImage}
-        {...imgProps}
-      />
-    </div>
-  );
+	return (
+		<div className="relative hidden h-full w-full md:block">
+			<Image
+				src={src}
+				alt={alt}
+				fill
+				className="rounded-xl object-cover"
+				onClick={handleClickOnImage}
+				{...imgProps}
+			/>
+		</div>
+	);
 }

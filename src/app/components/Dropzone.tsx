@@ -9,8 +9,6 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
 
   return (
     <div
-      role="button"
-      tabIndex={0}
       onClick={() => inputRef.current?.click()}
       onKeyDown={(e) =>
         (e.key === "Enter" || e.key === " ") && inputRef.current?.click()

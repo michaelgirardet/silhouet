@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "biome:check": "biome check --formatter-enabled=false .",
+    "biome:write": "biome check --formatter-enabled=false --write ."
   },
   "dependencies": {
     "@imgly/background-removal": "^1.7.0",
@@ -19,6 +21,7 @@
     "react-dom": "19.1.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.2.5",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",

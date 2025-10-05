@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { DownloadSimpleIcon, RepeatIcon } from "@phosphor-icons/react";
+import Image from "next/image";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import Dropzone from "@/app/components/Dropzone";
 import Modal from "@/app/components/Modal";
 import { downscaleImage, fileFromBlob } from "@/lib/image";
-import Image from "next/image";
 import Loader from "../components/Loader";
-import { DownloadSimpleIcon, RepeatIcon } from "@phosphor-icons/react";
 
 type RemoveBackgroundFn = (file: Blob | File, opts?: any) => Promise<Blob>;
 
@@ -18,6 +18,7 @@ export default function RemoveBgPage() {
   const [outURL, setOutURL] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const removerRef = useRef<RemoveBackgroundFn | null>(null);
+  const id = useId();
 
   useEffect(() => {
     const id = (window as any).requestIdleCallback?.(
@@ -145,6 +146,7 @@ export default function RemoveBgPage() {
               </a>
             )}
             <button
+              type="button"
               className="md:text-md hover:text-indigo flex cursor-pointer items-center justify-center gap-4 rounded-md border border-none bg-white px-4 py-2 text-sm font-medium"
               onClick={() => {
                 setSrcURL(null);
@@ -164,7 +166,7 @@ export default function RemoveBgPage() {
               src={outURL}
               alt="Prévisualisation résultat"
               className="mx-auto block max-h-[70vh] w-auto rounded"
-              id="result-image"
+              id={id}
               width={800}
               height={800}
             />
