@@ -104,8 +104,8 @@ export default function BeforeAfterSlider() {
           willChange: "left",
         }}
       >
-        <div className="bg-primary h-full w-[2px] translate-x-[-1px]" />
-        <div className="bg-primary absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white shadow-md" />
+        <div className="h-full w-[2px] translate-x-[-1px]" />
+        <div className="border-whiteshadow-md absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border-2" />
       </div>
     </div>
   );

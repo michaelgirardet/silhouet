@@ -43,6 +43,12 @@ body {
   animation: moveleft 1.5s ease-out;
 }
 
+#bg-background-remover {
+  background-image: url("/images/bg_transparent.webp");
+  background-repeat: repeat;
+  background-size: contain;
+}
+
 /* Hero  Title  */
 @keyframes moveright {
   0% {

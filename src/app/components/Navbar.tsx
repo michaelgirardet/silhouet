@@ -20,7 +20,7 @@ export default function Navbar() {
           <a
             href="/remove-bg"
             className={
-              "rounded-full bg-white px-4 py-2 shadow-sm transition duration-300 ease-in-out hover:bg-white/120 hover:opacity-80"
+              "hover:text-indigo rounded-full bg-white px-4 py-2 shadow-sm transition duration-300 ease-in-out"
             }
           >
             Supprimer l&apos;arrière plan

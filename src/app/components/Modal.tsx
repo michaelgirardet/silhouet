@@ -1,5 +1,6 @@
 "use client";
 
+import { XIcon } from "@phosphor-icons/react";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
@@ -81,13 +82,16 @@ export default function Modal({
           <button
             ref={firstFocusRef}
             onClick={onClose}
-            className="cursor-pointer rounded-full bg-red-500/80 px-3 py-1.5 font-bold text-white"
+            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full font-bold text-white transition duration-300 ease-in-out hover:border"
           >
-            ✕
+            <XIcon size={24} />
           </button>
         </div>
 
-        <div className="max-h-[70vh] overflow-auto bg-white p-4 md:p-5">
+        <div
+          className="bg- max-h-[70vh] overflow-auto p-4 md:p-5"
+          id="bg-background-remover"
+        >
           {children}
         </div>
 

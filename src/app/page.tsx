@@ -12,13 +12,13 @@ export default function Home() {
           className="mx-auto max-w-2xl text-4xl leading-tight font-bold tracking-tight md:mx-0 md:text-5xl lg:text-6xl"
           id="hero-title"
         >
-          Supprimez l&apos;arrière plan en un{" "}
+          Supprimez l&apos;arrière plan de vos images en un{" "}
           <span className="text-indigo">clic</span>.
         </h1>
 
         <h2 className="moveup text-muted-foreground mx-auto mt-3 max-w-2xl text-base md:mx-0 md:mt-4 md:text-xl">
-          Outil d&apos;image minimal et élégant : supprimez l&apos;arrière plan
-          et convertissez en webP pour de meilleures performances.
+          Obtenez un fond transparent instantanément et convertissez vos images
+          en WebP pour un web plus rapide — sans perdre en qualité.
         </h2>
         <div className="moveup mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row sm:items-stretch sm:gap-4 md:justify-start">
           <Link href="/remove-bg" passHref>
@@ -33,7 +33,7 @@ export default function Home() {
           <Link href="/convert" passHref>
             <button
               type="button"
-              className="w-[230px] cursor-pointer rounded-full bg-white px-6 py-3 font-semibold text-black shadow-sm transition duration-300 ease-in-out hover:bg-white/110 sm:w-auto md:min-w-0"
+              className="hover:text-indigo w-[230px] cursor-pointer rounded-full bg-white px-6 py-3 font-semibold text-black shadow-sm transition duration-300 ease-in-out sm:w-auto md:min-w-0"
               aria-label="Convertir une image"
             >
               Convertir
