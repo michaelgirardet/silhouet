@@ -80,11 +80,11 @@ export default function RemoveBgPage() {
       </div>
 
       {/* Dropzone occupe toute la largeur dispo */}
-      <div className="md:col-span-2">
+      <div className="content-center md:col-span-2">
         <Dropzone onFile={process} />
-      </div>
-      <div className="flex w-full items-center justify-center">
-        {busy && <Loader />}
+        <div className="mt-24 flex w-full items-center justify-center">
+          {busy && <Loader />}
+        </div>
       </div>
 
       {error && (

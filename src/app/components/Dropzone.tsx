@@ -1,5 +1,6 @@
 "use client";
 
+import { ExportIcon } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
 
 export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
@@ -26,16 +27,17 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
         if (f) onFile(f);
       }}
       className={[
-        "border-border rounded-lg border border-dotted",
+        "rounded-lg border border-black/20 transition duration-300 ease-in-out hover:text-black/80",
         "mx-auto w-full max-w-3xl",
         "min-h-[160px] sm:min-h-[190px] md:min-h-[220px]",
         "p-5 text-center sm:p-6 md:p-8",
         "flex flex-col items-center justify-center",
-        "transition",
+        "transition hover:cursor-pointer",
         drag ? "shadow-float border-accent-400" : "shadow-soft",
       ].join(" ")}
     >
-      <div className="text-base font-medium sm:text-lg">
+      <div className="flex flex-col items-center justify-center text-base font-medium sm:text-lg">
+        <ExportIcon size={32} />
         Glissez votre image ici
       </div>
       <div className="mt-1 text-xs opacity-70 sm:text-sm">
