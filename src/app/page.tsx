@@ -1,20 +1,10 @@
 "use client";
 
-import { useRandomImage } from "@/lib/utils/useRandomImage";
+import BeforeAfterSlider from "./components/BeforeAfterSlider";
 import { CheckCircleIcon, ImageSquareIcon } from "@phosphor-icons/react";
-
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
-  const images = [
-    "/images/hero_img_1.webp",
-    "/images/hero_img_2.webp",
-    "/images/hero_img_3.webp",
-    "/images/hero_img_4.webp",
-  ] as const;
-  const randomImage = useRandomImage(images);
-
   return (
     <section className="container mx-auto grid min-h-[70vh] items-center justify-between gap-10 px-4 py-12 md:grid-cols-2 md:py-16">
       <div className="flex h-full flex-col items-center justify-between text-center md:text-left">
@@ -23,12 +13,12 @@ export default function Home() {
           id="hero-title"
         >
           Supprimez l&apos;arrière plan en un{" "}
-          <span className="text-indigo">clic.</span>
+          <span className="text-indigo">clic</span>.
         </h1>
 
         <h2 className="moveup text-muted-foreground mx-auto mt-3 max-w-2xl text-base md:mx-0 md:mt-4 md:text-xl">
           Outil d&apos;image minimal et élégant : supprimez l&apos;arrière plan
-          et convertissez dans vos formats favoris.
+          et convertissez en webP pour de meilleures performances.
         </h2>
         <div className="moveup mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row sm:items-stretch sm:gap-4 md:justify-start">
           <Link href="/remove-bg" passHref>
@@ -40,7 +30,7 @@ export default function Home() {
               Supprimer l&apos;arrière plan
             </button>
           </Link>
-          <Link href="/tools" passHref>
+          <Link href="/convert" passHref>
             <button
               type="button"
               className="w-[230px] cursor-pointer rounded-full bg-white px-6 py-3 font-semibold text-black shadow-sm transition duration-300 ease-in-out hover:bg-white/110 sm:w-auto md:min-w-0"
@@ -64,13 +54,8 @@ export default function Home() {
       </div>
 
       {/* Image on right  */}
-      <div className="moveleft relative hidden h-full w-full md:block">
-        <Image
-          src={randomImage}
-          alt="Portrait d’une femme brune sur fond rose"
-          fill
-          className="rounded-xl object-cover"
-        />
+      <div className="moveleft relative hidden h-full w-full items-center justify-center md:flex">
+        <BeforeAfterSlider />
       </div>
     </section>
   );

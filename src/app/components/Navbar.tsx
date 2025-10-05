@@ -25,15 +25,6 @@ export default function Navbar() {
           >
             Supprimer l&apos;arrière plan
           </a>
-
-          {/* Futures pages à implémenter */}
-
-          {/* <a href="/toolkit" className={`hover:opacity-80 ${pathname === '/toolkit' ? 'active' : ''} [&.active]:text-indigo`}>
-            Conversion
-          </a>
-          <a href="/toolkit" className={`hover:opacity-80 ${pathname === '/toolkit' ? 'active' : ''} [&.active]:text-indigo`}>
-            Compression
-          </a> */}
         </nav>
       </div>
     </header>
