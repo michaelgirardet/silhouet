@@ -13,12 +13,20 @@ export async function downscaleImage(
 	const canvas = document.createElement("canvas");
 	canvas.width = targetW;
 	canvas.height = targetH;
-	const ctx = canvas.getContext("2d", { alpha: true })!;
+	const ctx = canvas.getContext("2d", { alpha: true });
+	if (!ctx) {
+		throw new Error("Contexte 2D non disponible.");
+	}
 	ctx.imageSmoothingEnabled = true;
 	ctx.imageSmoothingQuality = "high";
 	ctx.drawImage(imgBitmap, 0, 0, targetW, targetH);
-	const blob = await new Promise<Blob>((res) =>
-		canvas.toBlob((b) => res(b!), "image/png", 1),
+
+	const blob = await new Promise<Blob>((res, rej) =>
+		canvas.toBlob(
+			(b) => (b ? res(b) : rej(new Error("Échec de canvas.toBlob"))),
+			"image/png",
+			1,
+		),
 	);
 	return blob;
 }

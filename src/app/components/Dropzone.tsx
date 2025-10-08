@@ -9,10 +9,15 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
 
   return (
     <div
+      aria-label="Déposez une image ou cliquez pour sélectionner un fichier"
+      aria-describedby="dropzone-hint"
       onClick={() => inputRef.current?.click()}
-      onKeyDown={(e) =>
-        (e.key === "Enter" || e.key === " ") && inputRef.current?.click()
-      }
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          inputRef.current?.click();
+        }
+      }}
       onDragOver={(e) => {
         e.preventDefault();
         setDrag(true);
@@ -25,7 +30,7 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
         if (f) onFile(f);
       }}
       className={[
-        "hover:text-indigo border-indigo/20 rounded-lg border transition duration-300 ease-in-out",
+        "hover:text-indigo border-indigo/20 rounded-lg border duration-300 ease-in-out",
         "mx-auto w-full max-w-3xl",
         "min-h-[160px] sm:min-h-[190px] md:min-h-[220px]",
         "p-5 text-center sm:p-6 md:p-8",
@@ -47,7 +52,7 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
         accept="image/*"
         hidden
         onChange={(e) => {
-          const f = e.target.files?.[0];
+          const f = e.currentTarget.files?.[0];
           if (f) onFile(f);
         }}
       />
