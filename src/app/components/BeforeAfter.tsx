@@ -12,12 +12,14 @@ export default function BeforeAfter({
 	const [v, setV] = useState(50);
 	const wrapRef = useRef<HTMLDivElement>(null);
 
+	const clamp = (n: number) => Math.min(100, Math.max(0, n));
+
 	const setFromEvent = useCallback((clientX: number) => {
 		const el = wrapRef.current;
 		if (!el) return;
 		const rect = el.getBoundingClientRect();
 		const next = ((clientX - rect.left) / rect.width) * 100;
-		setV(Math.min(100, Math.max(0, next)));
+		setV(clamp(next));
 	}, []);
 
 	return (
@@ -59,9 +61,16 @@ export default function BeforeAfter({
 				<div className="bg-border mx-auto h-full w-[2px]" />
 			</div>
 
-			{/* Hit area draggable (souris + tactile) */}
+			{/* Zone interactive (drag + clavier) */}
 			<div
 				className="absolute inset-0"
+				role="slider"
+				aria-label="Comparateur avant/après"
+				aria-orientation="horizontal"
+				aria-valuemin={0}
+				aria-valuemax={100}
+				aria-valuenow={Math.round(v)}
+				tabIndex={0}
 				onMouseDown={(e) => {
 					e.preventDefault();
 					setFromEvent(e.clientX);
@@ -81,7 +90,25 @@ export default function BeforeAfter({
 					const t = e.touches[0];
 					if (t) setFromEvent(t.clientX);
 				}}
+				onKeyDown={(e) => {
+					// Pas d'autorepeat violent : petit step de 1, gros step de 10 avec Shift
+					const step = e.shiftKey ? 10 : 1;
+					if (e.key === "ArrowLeft") {
+						e.preventDefault();
+						setV((old) => clamp(old - step));
+					} else if (e.key === "ArrowRight") {
+						e.preventDefault();
+						setV((old) => clamp(old + step));
+					} else if (e.key === "Home") {
+						e.preventDefault();
+						setV(0);
+					} else if (e.key === "End") {
+						e.preventDefault();
+						setV(100);
+					}
+				}}
 			/>
+
 			<input
 				type="range"
 				min={0}

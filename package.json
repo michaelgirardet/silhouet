@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "biome:check": "biome check --formatter-enabled=false .",
-    "biome:write": "biome check --formatter-enabled=false --write ."
+    "biome:check": "npx @biomejs/biome format --write",
+    "biome:write": "npx @biomejs/biome check --write"
   },
   "dependencies": {
     "@imgly/background-removal": "^1.7.0",
@@ -21,7 +21,6 @@
     "react-dom": "19.1.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.5",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",

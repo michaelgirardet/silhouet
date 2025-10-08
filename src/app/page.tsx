@@ -10,7 +10,7 @@ export default function Home() {
       <div className="flex h-full flex-col items-center justify-between text-center md:text-left">
         <h1 className="hero-title text-mauve mx-auto max-w-2xl text-4xl leading-tight font-bold tracking-tight md:mx-0 md:text-5xl lg:text-6xl">
           Supprimez l&apos;arrière plan de vos images en un{" "}
-          <span className="text-indigo">clic</span>.
+          <span className="text-indigo inline-block animate-bounce">clic</span>.
         </h1>
 
         <h2 className="moveup text-mauve mx-auto mt-3 max-w-2xl text-base md:mx-0 md:mt-4 md:text-xl">
