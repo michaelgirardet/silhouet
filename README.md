@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Silhouet
 
-## Getting Started
+Supprimez l’arrière-plan et convertissez vos images en WebP directement dans votre navigateur.
 
-First, run the development server:
+[![Live Demo](https://img.shields.io/badge/Démo-en%20ligne-7C5CFF)](https://silhouet.vercel.app)
+![MIT License](https://img.shields.io/badge/Licence-MIT-green)
+![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1-38B2AC?logo=tailwindcss)
+
+---
+
+## Présentation
+
+**Silhouet** est une application web minimaliste permettant de supprimer l’arrière-plan d’une image ou de la convertir au format **WebP**, sans qu’aucune donnée ne soit transmise à un serveur.  
+Le traitement est effectué localement dans le navigateur grâce à WebAssembly et à la bibliothèque [`@imgly/background-removal`](https://www.npmjs.com/package/@imgly/background-removal).
+
+**Démo en ligne :** [https://silhouet.vercel.app](https://silhouet.vercel.app)
+
+---
+
+## Fonctionnalités principales
+
+- Suppression automatique d’arrière-plan avec `@imgly/background-removal`
+- Conversion rapide vers le format **WebP**
+- Traitement local (aucune donnée transmise)
+- Interface claire, responsive et accessible
+- Thème clair / sombre
+- Code 100 % TypeScript
+
+---
+
+## Stack technique
+
+| Couche           | Technologie                                           |
+| ---------------- | ----------------------------------------------------- |
+| Framework        | [Next.js 15](https://nextjs.org/) (Turbopack)         |
+| Langage          | TypeScript 5                                          |
+| Interface        | React 19 + Tailwind CSS 4 + next-themes               |
+| Traitement image | @imgly/background-removal + browser-image-compression |
+| Icônes           | @phosphor-icons/react                                 |
+| Analyse          | @vercel/analytics                                     |
+| Lint / formatage | ESLint 9, Prettier, Biome                             |
+
+---
+
+## Installation
+
+### 1. Cloner le dépôt
+
+```bash
+git clone https://github.com/ton-pseudo/silhouet.git
+cd silhouet
+```
+
+### 2. Installer les dépendances
+
+```bash
+npm install
+```
+
+### 3. Lancer le serveur de développement
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+L’application sera disponible sur http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Structure du projet
+src/
+├── app/
+│ ├── page.tsx # Page d'accueil
+│ ├── remove-bg/ # Outil de suppression d'arrière-plan
+│ ├── convert/ # Outil de conversion WebP
+│ └── components/ # Dropzone, ProgressBar, Modal, etc.
+├── lib/
+│ └── image.ts # Fonctions utilitaires (downscale, blob, etc.)
+├── styles/
+│ └── globals.css
+└── public/
+└── assets/ # Images et ressources publiques
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Objectif
 
-## Learn More
+Ce projet a été développé dans un but d’apprentissage et de démonstration technique.
+Il illustre la mise en œuvre de traitement d’image en local dans le navigateur, avec une attention particulière portée à la simplicité d’usage, à la performance et à la protection des données.
 
-To learn more about Next.js, take a look at the following resources:
+Auteur
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Développé par :
+https://github.com/michaelgirardet
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Licence
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ce projet est distribué sous la licence MIT.
