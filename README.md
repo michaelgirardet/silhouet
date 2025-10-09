@@ -67,22 +67,6 @@ npm run dev
 
 L’application sera disponible sur http://localhost:3000
 
-Structure du projet
-src/
-├── app/
-│ ├── page.tsx # Page d'accueil
-│ ├── remove-bg/ # Outil de suppression d'arrière-plan
-│ ├── convert/ # Outil de conversion WebP
-│ └── components/ # Dropzone, ProgressBar, Modal, etc.
-├── lib/
-│ └── image.ts # Fonctions utilitaires (downscale, blob, etc.)
-├── styles/
-│ └── globals.css
-└── public/
-└── assets/ # Images et ressources publiques
-
-Objectif
-
 Ce projet a été développé dans un but d’apprentissage et de démonstration technique.
 Il illustre la mise en œuvre de traitement d’image en local dans le navigateur, avec une attention particulière portée à la simplicité d’usage, à la performance et à la protection des données.
 
