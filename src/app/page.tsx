@@ -2,7 +2,8 @@
 
 import { CheckCircleIcon, ImageSquareIcon } from "@phosphor-icons/react";
 import Link from "next/link";
-import BeforeAfterSlider from "./components/BeforeAfterSlider";
+import Image from "next/image";
+import Illustration from "../../public/images/undraw_photograph_gwbm.svg";
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
           <span className="text-indigo inline-block animate-bounce">clic</span>.
         </h1>
 
-        <h2 className="moveup text-mauve mx-auto mt-3 max-w-2xl text-base md:mx-0 md:mt-4 md:text-xl">
+        <h2 className="moveup mx-auto mt-3 max-w-2xl text-lg text-black/50 md:mx-0 md:mt-4 md:text-xl">
           Obtenez un fond transparent instantanément et convertissez vos images
           en WebP pour un web plus rapide — sans perdre en qualité.
         </h2>
@@ -38,7 +39,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="moveup text-muted-foreground mx-auto mt-8 grid max-w-md grid-cols-2 gap-4 text-sm md:mx-0 md:gap-6">
+        <div className="moveup text-muted-foreground mx-auto mt-8 grid max-w-md grid-cols-2 gap-4 text-xs uppercase md:mx-0 md:gap-6">
           <div className="flex items-center gap-2">
             <CheckCircleIcon size={28} />
             <p>Aucune donnée conservée</p>
@@ -52,7 +53,7 @@ export default function Home() {
 
       {/* Image on right  */}
       <div className="moveleft relative hidden h-full w-full items-center justify-center md:flex">
-        <BeforeAfterSlider />
+        <Image src={Illustration} alt="illustration" width={560} height={560} />
       </div>
     </section>
   );
