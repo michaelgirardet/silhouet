@@ -22,7 +22,7 @@ export default function Home() {
           <Link href="/remove-bg" passHref>
             <button
               type="button"
-              className="bg-indigo hover:bg-indigo/80 w-[230px] cursor-pointer rounded-full px-6 py-3 font-semibold text-white shadow-sm transition duration-300 ease-in-out sm:w-auto md:min-w-0"
+              className="bg-rose hover:bg-rose/80 w-[230px] cursor-pointer rounded-full px-6 py-3 font-semibold text-white shadow-sm transition duration-300 ease-in-out sm:w-auto md:min-w-0"
               aria-label="Supprimer l'arrière plan"
             >
               Supprimer l&apos;arrière plan
@@ -31,7 +31,7 @@ export default function Home() {
           <Link href="/convert" passHref>
             <button
               type="button"
-              className="hover:text-indigo text-mauve w-[230px] cursor-pointer rounded-full bg-white px-6 py-3 font-semibold shadow-sm transition duration-300 ease-in-out sm:w-auto md:min-w-0"
+              className="hover:bg-indigo/10 text-indigo w-[230px] cursor-pointer rounded-full border border-none bg-white px-6 py-3 font-semibold shadow-sm transition duration-300 ease-in-out sm:w-auto md:min-w-0"
               aria-label="Convertir une image"
             >
               Convertir

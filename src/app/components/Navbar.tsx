@@ -17,7 +17,7 @@ export default function Navbar() {
           <h1 className="text-indigo text-3xl font-semibold">Silhouet</h1>
         </Link>
 
-        <nav className="md:text-md hidden items-center justify-between gap-4 text-sm font-medium md:flex md:gap-8">
+        <nav className="md:text-md hidden items-center justify-between gap-4 text-base font-medium md:flex md:gap-8">
           <ul className="flex items-center justify-center gap-4">
             <li>
               <a
@@ -45,6 +45,7 @@ export default function Navbar() {
           type="button"
           onClick={handleSetBurgerMenu}
           className="md:hidden"
+          aria-label="open mobile menu"
         >
           <ListIcon size={32} />
         </button>
@@ -52,11 +53,12 @@ export default function Navbar() {
 
       {/* BURGER MENU  */}
       {burgerMenu && (
-        <div className="slidein bg-magnolia absolute inset-0 z-50 h-screen w-full gap-8 p-4 md:hidden">
+        <div className="slidein absolute inset-0 z-50 h-screen w-full gap-8 bg-white p-4 md:hidden">
           <span
-            className="flex w-full justify-end"
+            className="flex w-full justify-between"
             onClick={handleSetBurgerMenu}
           >
+            <h3 className="text-indigo text-3xl font-semibold">Silhouet</h3>
             <XIcon size={38} />
           </span>
 
@@ -75,7 +77,7 @@ export default function Navbar() {
           </ul>
           <div className="flex w-full items-center justify-center">
             <button
-              className="flex h-14 w-48 items-center justify-center rounded-full bg-white font-semibold"
+              className="border-rose text-rose flex h-14 w-48 items-center justify-center rounded-full border font-semibold"
               onClick={() => setBurgerMenu(!burgerMenu)}
             >
               Retour
