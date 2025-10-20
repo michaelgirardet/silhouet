@@ -129,7 +129,7 @@ export default function ConvertImages() {
                 </a>
                 <button
                   type="button"
-                  className="md:text-md hover:text-indigo mt-3 cursor-pointer items-center justify-center gap-4 rounded-md border border-none bg-white px-4 py-2 text-sm font-medium font-semibold transition duration-300 ease-in-out"
+                  className="md:text-md hover:text-indigo mt-3 cursor-pointer items-center justify-center gap-4 rounded-md border border-none bg-white px-4 py-2 text-sm font-semibold transition duration-300 ease-in-out"
                   onClick={reset}
                 >
                   ↺ Recommencer
