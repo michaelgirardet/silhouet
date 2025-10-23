@@ -4,10 +4,9 @@
 /* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind theme block */
 @theme {
   --color-black: #050e0e;
-  --color-indigo: #196771;
-  --color-mauve: #0e0128;
+  --color-indigo: #0ca4a5;
   --color-white: #fefefe;
-  --color-rose: #d81159;
+  --color-rose: #119da4;
 }
 
 body {

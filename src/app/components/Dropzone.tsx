@@ -29,7 +29,7 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
         if (f) onFile(f);
       }}
       className={[
-        "text-indigo bg-indigo/5 rounded-lg font-semibold duration-300 ease-in-out",
+        "text-indigo bg-indigo/5 hover:bg-indigo/10 rounded-lg font-semibold duration-300 ease-in-out",
         "mx-auto w-full max-w-3xl",
         "min-h-[160px] sm:min-h-[190px] md:min-h-[220px]",
         "p-5 text-center sm:p-6 md:p-8",

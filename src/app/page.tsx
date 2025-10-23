@@ -31,7 +31,7 @@ export default function Home() {
           <Link href="/convert" passHref>
             <button
               type="button"
-              className="hover:bg-indigo/10 text-indigo w-[230px] cursor-pointer rounded-full border border-none bg-white px-6 py-3 font-semibold shadow-sm transition duration-300 ease-in-out sm:w-auto md:min-w-0"
+              className="hover:bg-rose/10 text-rose w-[230px] cursor-pointer rounded-full border border-none bg-white px-6 py-3 font-semibold shadow-sm transition duration-300 ease-in-out sm:w-auto md:min-w-0"
               aria-label="Convertir une image"
             >
               Convertir
