@@ -11,13 +11,13 @@ export default function Navbar() {
   };
 
   return (
-    <header className="border-indigo/10 top-0 z-40 border-b">
-      <div className="mx-auto flex h-18 max-w-6xl items-center justify-between px-4">
+    <nav>
+      <div className="mx-auto flex h-18 max-w-6xl items-center justify-center">
         <Link href="/" className="flex items-center gap-3">
-          <h1 className="text-indigo text-3xl font-semibold">Silhouet</h1>
+          <h1 className="text-3xl font-bold text-black">Silhouet</h1>
         </Link>
 
-        <nav className="md:text-md hidden items-center justify-between gap-4 text-base font-medium md:flex md:gap-8">
+        {/* <nav className="md:text-md hidden items-center justify-between gap-4 text-base font-medium md:flex md:gap-8">
           <ul className="flex items-center justify-center gap-4">
             <li>
               <a
@@ -40,7 +40,7 @@ export default function Navbar() {
               </a>
             </li>
           </ul>
-        </nav>
+        </nav> */}
         <button
           type="button"
           onClick={handleSetBurgerMenu}
@@ -85,6 +85,6 @@ export default function Navbar() {
           </div>
         </div>
       )}
-    </header>
+    </nav>
   );
 }

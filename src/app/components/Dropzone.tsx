@@ -1,6 +1,6 @@
 "use client";
 
-import { ExportIcon } from "@phosphor-icons/react";
+import { CloudArrowUpIcon } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
 
 export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
@@ -29,8 +29,8 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
         if (f) onFile(f);
       }}
       className={[
-        "text-indigo bg-indigo/5 hover:bg-indigo/10 rounded-lg font-semibold duration-300 ease-in-out",
-        "mx-auto w-full max-w-3xl",
+        "text-indigo bg-accent/5 hover:from-accent/20 hover:to-accent-5 rounded-lg font-semibold duration-300 ease-in-out hover:bg-gradient-to-br",
+        "mx-auto w-3xl",
         "min-h-[160px] sm:min-h-[190px] md:min-h-[220px]",
         "p-5 text-center sm:p-6 md:p-8",
         "flex flex-col items-center justify-center",
@@ -39,7 +39,7 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
       ].join(" ")}
     >
       <div className="flex flex-col items-center justify-center text-base font-medium sm:text-lg">
-        <ExportIcon size={32} />
+        <CloudArrowUpIcon size={32} />
         Glissez votre image ici
       </div>
       <div className="mt-1 text-xs opacity-70 sm:text-sm">
