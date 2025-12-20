@@ -50,7 +50,7 @@ function Hero() {
           className="bg-grey rounded-full p-1 text-white"
         />
         <Image
-          src={"/images/hero_image_nobg.PNG"}
+          src={"/images/hero_image_nobg.png"}
           alt="femme avec un chat"
           width={320}
           height={280}
