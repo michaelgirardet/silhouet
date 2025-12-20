@@ -64,11 +64,9 @@ export default function ConvertImages() {
   };
 
   return (
-    <section className="container mx-auto grid gap-8 px-4 py-10 md:grid-cols-2 md:gap-10 md:py-14">
+    <section className="flex w-full flex-col items-center justify-center">
       <div className="shadow-soft rounded-lg p-6 text-center text-2xl md:text-left">
-        <h1 className="mb-1 text-3xl font-bold sm:text-4xl">
-          Convertir en WebP
-        </h1>
+        <h1 className="mb-1 text-3xl font-bold">Convertir en WebP</h1>
         <p className="text-base opacity-80 sm:text-lg">
           Convertissez vos images PNG, JPG, GIF en WebP en un clic, sans perte
           visible de qualité.
@@ -90,11 +88,9 @@ export default function ConvertImages() {
 
       {/* Résultat */}
       {srcURL && (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:col-span-2">
+        <div className="mx-auto grid max-w-[768px] grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
-            <div className="border-indigo mb-1 border text-sm font-medium opacity-80">
-              Source
-            </div>
+            <div className="mb-1 text-sm font-medium opacity-80">Source</div>
             <Image
               src={srcURL}
               alt="source"
@@ -105,7 +101,7 @@ export default function ConvertImages() {
           </div>
 
           {outURL && (
-            <div>
+            <div className="mx-auto max-w-[80%]">
               <div className="mb-1 text-sm font-medium opacity-80">
                 Résultat (WebP)
               </div>

@@ -1,18 +1,24 @@
-@import url("https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 @import "tailwindcss";
 
-/* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind theme block */
-@theme {
-  --color-black: #050e0e;
-  --color-indigo: #0ca4a5;
-  --color-white: #fefefe;
-  --color-rose: #d81159;
+:root {
+  --background: #20222b;
+  --grey: #3a3f44;
+  --accent: #9f774e;
+  --white: #fcfcfe;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-grey: var(--grey);
+  --color-accent: var(--accent);
+  --color-white: var(--white);
+  --font-manrope: var(--font-manrope);
 }
 
 body {
-  background: #fefefe;
+  background: #fcfcfe;
   color: #050e0e;
-  font-family: "Funnel Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 ::selection {
   background: color-mix(in oklab, var(--color-accent-400) 25%, transparent);

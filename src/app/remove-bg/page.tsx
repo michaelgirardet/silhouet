@@ -44,9 +44,7 @@ export default function RemoveBgPage() {
           .then((m) => {
             removerRef.current = m.removeBackground;
           })
-          .catch(() => {
-            // on ignore: on réessaiera plus tard au premier usage
-          });
+          .catch(() => {});
       },
       { timeout: 1500 },
     );
@@ -100,19 +98,19 @@ export default function RemoveBgPage() {
   };
 
   return (
-    <section className="container mx-auto grid gap-8 py-10 md:grid-cols-2 md:gap-10 md:py-14">
-      <div className="shadow-soft rounded-lg p-6 text-center text-2xl md:text-left">
+    <section className="flex w-full flex-col items-center justify-center">
+      <div className="shadow-soft max-w-242 rounded-lg p-6 py-24 text-left text-2xl">
         <h1 className="mb-1 text-3xl font-bold sm:text-4xl">
-          Supprimer l&apos;arrière plan
+          Déposez votre image, nous supprimons l&apos;arrière plan
+          automatiquement.
         </h1>
         <p className="text-base opacity-80 sm:text-lg">
-          Supprimez l&apos;arrière plan de vos images facilement et sans
-          restriction.
+          PNG, JPG, WebP - Jusqu&apos;à 25 Mo - Traitement instantané
         </p>
       </div>
 
       {/* Dropzone occupe toute la largeur dispo */}
-      <div className="content-center px-4 md:col-span-2">
+      <div className="flex flex-col items-center justify-center">
         <Dropzone onFile={process} />
         <div className="mt-24 flex w-full items-center justify-center">
           {busy && <Loader />}
@@ -127,7 +125,7 @@ export default function RemoveBgPage() {
 
       {/* Vignettes de résultat*/}
       {srcURL && (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:col-span-2">
+        <div className="mx-auto grid max-w-[768px] grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <div className="mb-1 text-sm font-medium opacity-80">Source</div>
             <Image
@@ -166,28 +164,30 @@ export default function RemoveBgPage() {
         title="Aperçu du détourage"
         footer={
           <>
-            {outURL && (
-              <a
-                href={outURL}
-                download="silhouet-no-bg.png"
-                className="bg-indigo md:text-md hover:bg-indigo/80 flex cursor-pointer items-center justify-center gap-4 rounded-md px-4 py-2 text-sm font-semibold text-white transition duration-300 ease-in-out hover:shadow-sm"
+            <div className="flex">
+              {outURL && (
+                <a
+                  href={outURL}
+                  download="silhouet-no-bg.png"
+                  className="md:text-mdflex bg-accent flex cursor-pointer items-center justify-center gap-4 rounded-md px-4 py-2 text-sm font-semibold text-white transition duration-300 ease-in-out"
+                >
+                  <DownloadSimpleIcon size={24} />
+                  Télécharger le PNG
+                </a>
+              )}
+              <button
+                type="button"
+                className="md:text-md flex cursor-pointer items-center justify-center gap-4 rounded-md border border-none bg-white px-4 py-2 text-sm font-semibold transition duration-300 ease-in-out hover:text-black/80"
+                onClick={() => {
+                  setSrcURL(null);
+                  setOutURL(null);
+                  setError(null);
+                  setOpen(false);
+                }}
               >
-                <DownloadSimpleIcon size={24} />
-                Télécharger le PNG
-              </a>
-            )}
-            <button
-              type="button"
-              className="md:text-md flex cursor-pointer items-center justify-center gap-4 rounded-md border border-none bg-white px-4 py-2 text-sm font-semibold transition duration-300 ease-in-out hover:text-black/80"
-              onClick={() => {
-                setSrcURL(null);
-                setOutURL(null);
-                setError(null);
-                setOpen(false);
-              }}
-            >
-              <RepeatIcon size={24} /> Recommencer
-            </button>
+                <RepeatIcon size={24} /> Recommencer
+              </button>
+            </div>
           </>
         }
       >
