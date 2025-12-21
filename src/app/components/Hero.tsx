@@ -7,13 +7,13 @@ function Hero() {
   return (
     <section className="flex flex-col items-center justify-center gap-16">
       <div className="flex flex-col items-center justify-center gap-8">
-        <h2 className="text-background text-5xl font-bold">
+        <h2 className="text-background text-6xl font-bold">
           Détourage précis et instantané.
         </h2>
-        <h3 className="text-3xl font-medium">
+        <h3 className="text-4xl font-medium">
           Sans compte. Sans limite. Sans stockage{" "}
         </h3>
-        <h4 className="text-lg">
+        <h4 className="text-xl">
           Supprimez l&apos;arrière plan de vos images en quelques secondes.
           <br />
           PNG et WebP transparents prêts à l&apos;usage
@@ -39,7 +39,7 @@ function Hero() {
       </div>
       <div className="flex items-center justify-center gap-4">
         <Image
-          src={"/images/hero_image.jpg"}
+          src={"/images/rosa_img.jpg"}
           alt="femme avec un chat"
           width={320}
           height={280}
@@ -50,7 +50,7 @@ function Hero() {
           className="bg-grey rounded-full p-1 text-white"
         />
         <Image
-          src={"/images/hero_image_nobg.png"}
+          src={"/images/rosa_img_nobg.png"}
           alt="femme avec un chat"
           width={320}
           height={280}
