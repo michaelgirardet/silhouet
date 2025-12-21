@@ -1,4 +1,4 @@
-import { LightningIcon, ShieldIcon, StarIcon } from "@phosphor-icons/react";
+import { LightningIcon, ShieldIcon, ShieldSlashIcon, StarIcon } from "@phosphor-icons/react";
 import React from "react";
 
 const whyUsContent = [
@@ -16,7 +16,7 @@ const whyUsContent = [
   },
   {
     id: 1,
-    icon: <ShieldIcon size={32} />,
+    icon: <ShieldSlashIcon size={32} />,
     title: "Respect de la vie privée",
     text: "Images traitées puis supprimées",
   },
@@ -25,7 +25,7 @@ const whyUsContent = [
 function Whyus() {
   return (
     <div className="flex flex-col items-center justify-center gap-24">
-      <h3 className="text-4xl">
+      <h3 className="text-5xl">
         Pourquoi <span className="font-medium">Silhouet ?</span>
       </h3>
 
@@ -36,7 +36,7 @@ function Whyus() {
             className="flex max-w-64 cursor-pointer flex-col items-center gap-4 rounded-lg p-8 text-center shadow-lg transition duration-300 ease-in-out hover:scale-105"
           >
             <div>{item.icon}</div>
-            <h4>{item.title}</h4>
+            <h4 className="font-semibold text-lg">{item.title}</h4>
             <p>{item.text}</p>
           </article>
         ))}

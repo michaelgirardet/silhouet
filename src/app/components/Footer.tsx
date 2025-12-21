@@ -1,6 +1,7 @@
 "use client";
 
 import { EnvelopeIcon, QuestionIcon } from "@phosphor-icons/react";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -8,21 +9,26 @@ export default function Footer() {
       <div className="flex">
         <p>Crédit Photo: </p>
         <a
-          href="https://unsplash.com/fr/@tranmautritam?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+          href="https://unsplash.com/fr/@rosarafael?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
           target="_blank"
         >
-          Tran Mau Tri Tam
+          Rosa Rafael
         </a>
       </div>
       <p>© {new Date().getFullYear()} · Silhouet · Tout droits réservés.</p>
       <ul className="flex gap-8">
-        <li className="flex items-center justify-center gap-1">
-          <EnvelopeIcon size={32} />
-          Contact
-        </li>
-        <li className="flex items-center justify-center gap-1">
-          <QuestionIcon size={32} />À Propos
-        </li>
+        <Link href={"/contact"}>
+          <li className="flex items-center justify-center gap-1">
+            <EnvelopeIcon size={32} />
+            Contact
+          </li>
+        </Link>
+
+        <Link href={"/a-propos"}>
+          <li className="flex items-center justify-center gap-1">
+            <QuestionIcon size={32} />À Propos
+          </li>
+        </Link>
       </ul>
     </footer>
   );
