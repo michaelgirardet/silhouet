@@ -1,98 +1,214 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+/*
+ * Design system Silhouet : chambre noire.
+ * Tokens définis dans @theme (Tailwind v4) : couleurs, typographie, rayons.
+ * L'espacement utilise l'échelle Tailwind (unité de base 4px).
+ */
+@theme {
+  /* Couleurs */
+  --color-canvas: #121014;
+  --color-soot: #1a1820;
+  --color-ash: #232028;
+  --color-haze: #2c2932;
+  --color-stone: #8d8794;
+  --color-slate: #c9c4cf;
+  --color-ivory: #f4f1ec;
+  --color-chalk: #fbfaf8;
+  --color-amber: #e8a33d;
+  --color-amber-deep: #b97a1e;
+
+  /* Typo : familles (self-hosted via next/font) */
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Typo : échelle */
+  --text-micro: 12px;
+  --text-micro--line-height: 1.2;
+  --text-micro--letter-spacing: 0.02em;
+  --text-caption: 14px;
+  --text-caption--line-height: 1.5;
+  --text-body-sm: 16px;
+  --text-body-sm--line-height: 1.6;
+  --text-body: 18px;
+  --text-body--line-height: 1.5;
+  --text-subheading: 24px;
+  --text-subheading--line-height: 1.3;
+  --text-subheading--letter-spacing: -0.01em;
+  --text-heading: 32px;
+  --text-heading--line-height: 1.2;
+  --text-heading--letter-spacing: -0.02em;
+  --text-heading-lg: 44px;
+  --text-heading-lg--line-height: 1.1;
+  --text-heading-lg--letter-spacing: -0.025em;
+  --text-display: 72px;
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.04em;
+
+  /* Rayons */
+  --radius-cards: 20px;
+  --radius-images: 24px;
+  --radius-inputs: 12px;
+  --radius-large-buttons: 48px;
+
+  /* Layout */
+  --container-page: 1120px;
+}
 
 :root {
-  --background: #20222b;
-  --grey: #3a3f44;
-  --accent: #9f774e;
-  --white: #fcfcfe;
-  --page-bg: #fcfcfe;
-  --page-text: #050e0e;
+  color-scheme: dark;
+
+  /* Élévation : hairline comme unique système de bordure */
+  --hairline: rgba(255, 255, 255, 0.06);
+
+  /* Le seul effet lumineux autorisé : halo de révélation */
+  --halo-reveal: 0 0 80px -20px rgba(232, 163, 61, 0.25);
+
+  /* Surface de champ */
+  --surface-input: #1e1c22;
 }
 
-.dark {
-  --page-bg: #20222b;
-  --page-text: #fcfcfe;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-grey: var(--grey);
-  --color-accent: var(--accent);
-  --color-white: var(--white);
-  --font-manrope: var(--font-manrope);
+/* Thème clair : inversion des tokens (les utilitaires lisent les mêmes
+   variables). Craie devient la toile, les textes s'inversent, l'ambre reste
+   le seul accent. Les valeurs white/6 des composants deviennent des hairlines
+   sombres via les règles ciblées plus bas. */
+html[data-theme="light"] {
+  color-scheme: light;
+  --color-canvas: #fbfaf8;
+  --color-soot: #f4f1ec;
+  --color-ash: #eceae4;
+  --color-haze: #d9d6cf;
+  --color-stone: #6f6877;
+  --color-slate: #3a3641;
+  --color-ivory: #1c1920;
+  --color-chalk: #26232b;
+  --hairline: rgba(0, 0, 0, 0.08);
+  --surface-input: #efece6;
+  --halo-reveal: 0 0 80px -20px rgba(185, 122, 30, 0.18);
 }
 
 body {
-  background: var(--page-bg);
-  color: var(--page-text);
-  font-family: "Manrope", sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-slate);
+  font-family: var(--font-body);
+  font-feature-settings: "ss01", "tnum";
 }
+
 ::selection {
-  background: color-mix(in oklab, var(--color-accent-400) 25%, transparent);
+  background: color-mix(in oklab, var(--color-amber) 25%, transparent);
 }
+
+/* Un seul signal d'attention dans tout le système : le focus ambre */
 *:focus-visible {
-  outline: 2px solid var(--ring);
+  outline: 2px solid var(--color-amber);
   outline-offset: 2px;
 }
 
-.loader {
-  display: block;
-  position: relative;
-  height: 12px;
-  width: 80%;
-  border: 1px solid #fff;
-  border-radius: 10px;
-  overflow: hidden;
+/* Césures typographiques : titres équilibrés, paragraphes sans ligne veuve */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
 }
 
-.hero-title {
-  animation: moveright 0.8s ease-out;
+p {
+  text-wrap: pretty;
+}
+
+/* Chiffres tabulaires pour temps, tailles et compteurs */
+.tnum {
+  font-feature-settings: "tnum";
+}
+
+/* Damier sombre pour visualiser la transparence, sans asset externe */
+.checker {
+  background-image:
+    linear-gradient(45deg, #1a181d 25%, transparent 25%),
+    linear-gradient(-45deg, #1a181d 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1a181d 75%),
+    linear-gradient(-45deg, transparent 75%, #1a181d 75%);
+  background-color: #211f26;
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+html[data-theme="light"] .checker {
+  background-image:
+    linear-gradient(45deg, #e3e0d9 25%, transparent 25%),
+    linear-gradient(-45deg, #e3e0d9 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e3e0d9 75%),
+    linear-gradient(-45deg, transparent 75%, #e3e0d9 75%);
+  background-color: #f6f4ef;
+}
+
+/* Hairlines : les bordures white/6 des composants s'inversent en thème clair */
+html[data-theme="light"] .border-white\/6 {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme="light"] .hover\:bg-white\/5:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+html[data-theme="light"] .decoration-white\/6 {
+  text-decoration-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Halo de révélation : fort au moment de l'apparition, puis atténué */
+.halo-reveal {
+  animation: halo 2.5s ease-out forwards;
+}
+
+@keyframes halo {
+  0% {
+    box-shadow: 0 0 90px -10px rgba(232, 163, 61, 0.45);
+  }
+  100% {
+    box-shadow: var(--halo-reveal);
+  }
+}
+
+/* Barre de progression du modèle : pilule ambre en dégradé */
+.progress-track {
+  position: relative;
+  height: 4px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-haze);
+}
+
+.progress-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 40%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--color-amber-deep),
+    var(--color-amber)
+  );
+  /* transform (composited) plutôt que left : pas de reflow par frame */
+  animation: progress-slide 1.4s ease-in-out infinite;
+}
+
+@keyframes progress-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
 }
 
 .moveup {
   animation: moveup 0.6s ease-out;
 }
 
-.moveleft {
-  animation: moveleft 1.5s ease-out;
-}
-
 .slidein {
   animation: slidein 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Damier pour visualiser la transparence, sans asset externe */
-.bg-background-remover {
-  background-image: conic-gradient(
-    #e8e8ea 25%,
-    #fcfcfe 0 50%,
-    #e8e8ea 0 75%,
-    #fcfcfe 0
-  );
-  background-size: 16px 16px;
-}
-
-.dark .bg-background-remover {
-  background-image: conic-gradient(
-    #2b2e38 25%,
-    #20222b 0 50%,
-    #2b2e38 0 75%,
-    #20222b 0
-  );
-}
-
-/* Hero  Title  */
-@keyframes moveright {
-  0% {
-    transform: translateX(-15%);
-    opacity: 0%;
-  }
-  100% {
-    transform: translateX(0%);
-    opacity: 100%;
-  }
 }
 
 @keyframes moveup {
@@ -106,46 +222,27 @@ body {
   }
 }
 
-@keyframes moveleft {
-  0% {
-    transform: translateX(0%);
-    opacity: 0%;
-  }
-  100% {
-    transform: translateX(0%);
-    opacity: 100%;
-  }
-}
-
-/* Barre de loading  */
-@keyframes animloader {
-  0% {
-    left: 0;
-    transform: translateX(-100%);
-  }
-  25% {
-    left: 25;
-    transform: translateX(-75%);
-  }
-  50% {
-    left: 50;
-    transform: translateX(-50%);
-  }
-  75% {
-    left: 75;
-    transform: translateX(-25%);
-  }
-  100% {
-    left: 100%;
-    transform: translateX(0%);
-  }
-}
-
 @keyframes slidein {
   0% {
     transform: translateX(100%);
   }
   100% {
     transform: translateX(0%);
+  }
+}
+
+/* Sensibilité au mouvement : les animations d'entrée disparaissent, la
+   progression garde un état figé lisible (remplissage partiel) ; l'état
+   de chargement reste transmis par la pilule et son libellé micro. */
+@media (prefers-reduced-motion: reduce) {
+  .moveup,
+  .slidein,
+  .halo-reveal {
+    animation: none;
+  }
+
+  .progress-fill {
+    animation: none;
+    opacity: 0.6;
   }
 }

@@ -3,6 +3,7 @@
 import { XIcon } from "@phosphor-icons/react";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useI18n } from "@/lib/i18n";
 
 type Props = {
   open: boolean;
@@ -19,6 +20,7 @@ export default function Modal({
   children,
   footer,
 }: Props) {
+  const { t } = useI18n();
   const overlayRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const firstFocusRef = useRef<HTMLButtonElement>(null);
@@ -64,7 +66,7 @@ export default function Modal({
   return createPortal(
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
       onMouseDown={(e) => {
         if (e.target === overlayRef.current) onClose();
       }}
@@ -75,26 +77,29 @@ export default function Modal({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="border/20 bg-[var(--page-bg)] animate-in fade-in relative w-full max-w-3xl rounded-xl text-lg shadow-2xl duration-150"
+        className="bg-soot rounded-cards relative w-full max-w-3xl border border-white/6"
       >
-        <div className="bg-indigo border-border flex items-center justify-between rounded-t-2xl p-4 text-white md:p-5">
-          <div className="text-base font-semibold md:text-lg">{title}</div>
+        <div className="border-haze/60 flex items-center justify-between border-b p-4 md:p-5">
+          <div className="text-ivory font-display text-caption font-medium">
+            {title}
+          </div>
           <button
             type="button"
             ref={firstFocusRef}
             onClick={onClose}
-            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full font-bold text-white transition duration-300 ease-in-out hover:border"
+            aria-label={t.modal.close}
+            className="text-slate hover:bg-white/5 hover:text-ivory flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition-colors duration-150"
           >
-            <XIcon size={24} />
+            <XIcon size={20} weight="light" />
           </button>
         </div>
 
-        <div className="bg-background-remover max-h-[70vh] overflow-auto p-4 md:p-5">
+        <div className="checker max-h-[70vh] overflow-auto p-4 md:p-5">
           {children}
         </div>
 
         {footer && (
-          <div className="border-border flex flex-col gap-2 border-t p-4 sm:flex-row sm:justify-end md:p-5">
+          <div className="border-haze/60 flex flex-col gap-2 border-t p-4 sm:flex-row sm:justify-end md:p-5">
             {footer}
           </div>
         )}

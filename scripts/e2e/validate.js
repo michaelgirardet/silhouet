@@ -169,7 +169,7 @@ function check(name, ok, detail = '') {
   async function recommencer() {
     await page.evaluate(() => {
       const b = [...document.querySelectorAll('button')].find((x) =>
-        x.textContent.includes('Recommencer')
+        x.textContent.includes('Réessayer')
       );
       if (b) b.click();
     });
