@@ -3,6 +3,7 @@
 import { XIcon } from "@phosphor-icons/react";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useI18n } from "@/lib/i18n";
 
 type Props = {
   open: boolean;
@@ -19,6 +20,7 @@ export default function Modal({
   children,
   footer,
 }: Props) {
+  const { t } = useI18n();
   const overlayRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const firstFocusRef = useRef<HTMLButtonElement>(null);
@@ -85,7 +87,7 @@ export default function Modal({
             type="button"
             ref={firstFocusRef}
             onClick={onClose}
-            aria-label="Fermer"
+            aria-label={t.modal.close}
             className="text-slate hover:bg-white/5 hover:text-ivory flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition-colors duration-150"
           >
             <XIcon size={20} weight="light" />

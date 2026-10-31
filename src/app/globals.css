@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * Design system Silhouet — chambre noire.
+ * Design system Silhouet : chambre noire.
  * Tokens définis dans @theme (Tailwind v4) : couleurs, typographie, rayons.
  * L'espacement utilise l'échelle Tailwind (unité de base 4px).
  */
@@ -18,11 +18,11 @@
   --color-amber: #e8a33d;
   --color-amber-deep: #b97a1e;
 
-  /* Typo — familles (self-hosted via next/font) */
+  /* Typo : familles (self-hosted via next/font) */
   --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  /* Typo — échelle */
+  /* Typo : échelle */
   --text-micro: 12px;
   --text-micro--line-height: 1.2;
   --text-micro--letter-spacing: 0.02em;
@@ -58,7 +58,7 @@
 :root {
   color-scheme: dark;
 
-  /* Élévation — hairline comme unique système de bordure */
+  /* Élévation : hairline comme unique système de bordure */
   --hairline: rgba(255, 255, 255, 0.06);
 
   /* Le seul effet lumineux autorisé : halo de révélation */
@@ -66,6 +66,25 @@
 
   /* Surface de champ */
   --surface-input: #1e1c22;
+}
+
+/* Thème clair : inversion des tokens (les utilitaires lisent les mêmes
+   variables). Craie devient la toile, les textes s'inversent, l'ambre reste
+   le seul accent. Les valeurs white/6 des composants deviennent des hairlines
+   sombres via les règles ciblées plus bas. */
+html[data-theme="light"] {
+  color-scheme: light;
+  --color-canvas: #fbfaf8;
+  --color-soot: #f4f1ec;
+  --color-ash: #eceae4;
+  --color-haze: #d9d6cf;
+  --color-stone: #6f6877;
+  --color-slate: #3a3641;
+  --color-ivory: #1c1920;
+  --color-chalk: #26232b;
+  --hairline: rgba(0, 0, 0, 0.08);
+  --surface-input: #efece6;
+  --halo-reveal: 0 0 80px -20px rgba(185, 122, 30, 0.18);
 }
 
 body {
@@ -113,6 +132,28 @@ p {
   background-position: 0 0, 0 8px, 8px -8px, -8px 0;
 }
 
+html[data-theme="light"] .checker {
+  background-image:
+    linear-gradient(45deg, #e3e0d9 25%, transparent 25%),
+    linear-gradient(-45deg, #e3e0d9 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e3e0d9 75%),
+    linear-gradient(-45deg, transparent 75%, #e3e0d9 75%);
+  background-color: #f6f4ef;
+}
+
+/* Hairlines : les bordures white/6 des composants s'inversent en thème clair */
+html[data-theme="light"] .border-white\/6 {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme="light"] .hover\:bg-white\/5:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+html[data-theme="light"] .decoration-white\/6 {
+  text-decoration-color: rgba(0, 0, 0, 0.15);
+}
+
 /* Halo de révélation : fort au moment de l'apparition, puis atténué */
 .halo-reveal {
   animation: halo 2.5s ease-out forwards;
@@ -127,7 +168,7 @@ p {
   }
 }
 
-/* Barre de progression du modèle — pilule ambre en dégradé */
+/* Barre de progression du modèle : pilule ambre en dégradé */
 .progress-track {
   position: relative;
   height: 4px;
@@ -191,7 +232,7 @@ p {
 }
 
 /* Sensibilité au mouvement : les animations d'entrée disparaissent, la
-   progression garde un état figé lisible (remplissage partiel) — l'état
+   progression garde un état figé lisible (remplissage partiel) ; l'état
    de chargement reste transmis par la pilule et son libellé micro. */
 @media (prefers-reduced-motion: reduce) {
   .moveup,

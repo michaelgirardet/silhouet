@@ -1,5 +1,5 @@
 <svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
   <title>Silhouet — marque</title>
-  <path fill="#f4f1ec" d="M128 24 A104 104 0 0 0 128 232 Z"/>
-  <path fill="#e8a33d" d="M128 24 A104 104 0 0 1 128 232 L128 158 A74 74 0 0 0 128 54 Z"/>
+  <path d="M168 88 A40 40 0 1 0 128 128 A40 40 0 1 1 168 168" fill="none" stroke="#f4f1ec" stroke-width="34" stroke-linecap="round"/>
+  <line x1="40" y1="128" x2="216" y2="128" stroke="#e8a33d" stroke-width="7" stroke-dasharray="18 14"/>
 </svg>

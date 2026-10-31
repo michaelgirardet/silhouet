@@ -2,12 +2,15 @@ export const MAX_FILE_BYTES = 25 * 1024 * 1024;
 
 export const ACCEPTED_TYPES = ["image/png", "image/jpeg", "image/webp", "image/gif"];
 
-export function validateImageFile(file: File): string | null {
+/** Codes d'erreur de validation, traduits par les pages via le dictionnaire i18n. */
+export type ImageErrorCode = "not-image" | "too-large";
+
+export function validateImageFile(file: File): ImageErrorCode | null {
 	if (!file.type.startsWith("image/")) {
-		return "Le fichier sélectionné n'est pas une image.";
+		return "not-image";
 	}
 	if (file.size > MAX_FILE_BYTES) {
-		return "L'image dépasse la limite de 25 Mo.";
+		return "too-large";
 	}
 	return null;
 }

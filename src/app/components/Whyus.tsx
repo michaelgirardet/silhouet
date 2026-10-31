@@ -3,30 +3,33 @@ import {
   ShieldSlashIcon,
   StarIcon,
 } from "@phosphor-icons/react";
-
-const whyUsContent = [
-  {
-    icon: <LightningIcon size={24} weight="light" />,
-    title: "Rapide",
-    text: "Détourage automatique en quelques secondes",
-  },
-  {
-    icon: <StarIcon size={24} weight="light" />,
-    title: "Précis",
-    text: "Bords nets, détails respectés",
-  },
-  {
-    icon: <ShieldSlashIcon size={24} weight="light" />,
-    title: "Respect de la vie privée",
-    text: "Images traitées puis supprimées",
-  },
-];
+import { useI18n } from "@/lib/i18n";
 
 function Whyus() {
+  const { t } = useI18n();
+
+  const whyUsContent = [
+    {
+      icon: <LightningIcon size={24} weight="light" />,
+      title: t.whyus.fastTitle,
+      text: t.whyus.fastText,
+    },
+    {
+      icon: <StarIcon size={24} weight="light" />,
+      title: t.whyus.preciseTitle,
+      text: t.whyus.preciseText,
+    },
+    {
+      icon: <ShieldSlashIcon size={24} weight="light" />,
+      title: t.whyus.privacyTitle,
+      text: t.whyus.privacyText,
+    },
+  ];
+
   return (
     <div className="flex flex-col items-center gap-16 px-6 pb-32">
       <h2 className="text-ivory font-display text-subheading font-medium">
-        Pourquoi Silhouet ?
+        {t.whyus.title}
       </h2>
 
       <div className="grid w-full max-w-page grid-cols-1 gap-4 md:grid-cols-3">
@@ -47,12 +50,8 @@ function Whyus() {
       </div>
 
       <div className="flex w-full flex-col items-center justify-center gap-2 text-center">
-        <p className="text-micro tnum text-slate">
-          Formats supportés : PNG, JPG, WEBP — jusqu&apos;à 25 Mo
-        </p>
-        <p className="text-micro text-stone">
-          Vos images ne sont jamais conservées.
-        </p>
+        <p className="text-micro tnum text-slate">{t.whyus.formats}</p>
+        <p className="text-micro text-stone">{t.whyus.neverStored}</p>
       </div>
     </div>
   );

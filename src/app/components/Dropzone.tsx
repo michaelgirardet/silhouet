@@ -2,8 +2,10 @@
 
 import { CloudArrowUpIcon } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
+import { useI18n } from "@/lib/i18n";
 
 export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
+  const { t } = useI18n();
   const inputRef = useRef<HTMLInputElement>(null);
   const [drag, setDrag] = useState(false);
 
@@ -11,7 +13,7 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
     <div
       role="button"
       tabIndex={0}
-      aria-label="Déposez une image ou cliquez pour sélectionner un fichier"
+      aria-label={t.dropzone.aria}
       onClick={() => inputRef.current?.click()}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
@@ -44,17 +46,14 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
       <div aria-hidden className="text-ivory">
         <CloudArrowUpIcon size={24} weight="light" />
       </div>
-      <div className="text-body-sm text-slate">Glissez votre image ici</div>
-      <div className="text-micro text-stone">
-        PNG, JPG, WebP — jusqu&apos;à 25 Mo
-      </div>
+      <div className="text-body-sm text-slate">{t.dropzone.dropHint}</div>
+      <div className="text-micro text-stone">{t.dropzone.formats}</div>
       <div className="text-micro leading-[1.3] text-stone mt-4">
-        Tout se passe dans votre navigateur — aucune image envoyée sur un
-        serveur
+        {t.dropzone.privacyNote}
       </div>
-      <label htmlFor="glissez-image" aria-label="glissez-image">
+      <label htmlFor="dropzone-file" aria-label="dropzone-file">
         <input
-          id="glissez-image"
+          id="dropzone-file"
           ref={inputRef}
           type="file"
           accept="image/*"

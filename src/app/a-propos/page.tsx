@@ -1,62 +1,49 @@
+"use client";
+
 import Image from "next/image";
+import { useI18n } from "@/lib/i18n";
 
 export default function About() {
+  const { t } = useI18n();
+
   return (
     <div className="mx-auto flex max-w-page flex-col items-center px-6 py-16 md:py-24">
       {/* Hero */}
       <div className="max-w-3xl space-y-6 text-center">
         <h1 className="text-ivory font-display text-heading font-medium sm:text-heading-lg">
-          Un outil simple pour des images propres
+          {t.about.title}
         </h1>
 
-        <p className="text-body text-slate">
-          Silhouet est un outil en ligne conçu pour une seule chose : supprimer
-          l’arrière-plan de vos images rapidement, sans friction et sans
-          compromis sur la qualité.
-        </p>
+        <p className="text-body text-slate">{t.about.intro}</p>
 
-        <p className="text-body-sm text-stone">
-          Pas d’inscription · Pas de stockage · Pas de complexité inutile
-        </p>
+        <p className="text-body-sm text-stone">{t.about.tagline}</p>
       </div>
 
       {/* Problem / Philosophy */}
       <div className="mt-20 grid max-w-5xl grid-cols-1 gap-12 md:grid-cols-2">
         <div className="space-y-4">
           <h2 className="text-ivory font-display text-subheading font-medium">
-            Le problème
+            {t.about.problemTitle}
           </h2>
           <ul className="text-body-sm list-inside list-disc space-y-2 text-slate">
-            <li>Des inscriptions inutiles</li>
-            <li>Des quotas peu clairs</li>
-            <li>Un stockage forcé des images</li>
-            <li>Des interfaces surchargées</li>
+            <li>{t.about.problem1}</li>
+            <li>{t.about.problem2}</li>
+            <li>{t.about.problem3}</li>
+            <li>{t.about.problem4}</li>
           </ul>
-
-          <p className="text-body-sm text-slate">
-            Silhouet prend le contre-pied.
-          </p>
         </div>
 
         <div className="space-y-4">
           <h2 className="text-ivory font-display text-subheading font-medium">
-            La philosophie
+            {t.about.philosophyTitle}
           </h2>
-          <p className="text-body-sm text-slate">
-            Un outil direct, transparent et respectueux de l’utilisateur.
-          </p>
-          <p className="text-body-sm text-slate">
-            Vous déposez une image, l’arrière-plan est supprimé, vous récupérez
-            un fichier prêt à l’usage.
-          </p>
-          <p className="text-body-sm text-slate">
-            Aucune étape intermédiaire. Aucune action superflue.
-          </p>
+          <p className="text-body-sm text-slate">{t.about.philosophy1}</p>
+          <p className="text-body-sm text-slate">{t.about.philosophy2}</p>
         </div>
 
         <Image
           src="/images/about.jpg"
-          alt="photo artistique"
+          alt={t.about.alt}
           width={720}
           height={360}
           className="rounded-images col-span-2 h-auto w-full border border-white/6"
@@ -66,51 +53,42 @@ export default function About() {
       {/* Privacy */}
       <div className="bg-soot rounded-cards mt-20 max-w-3xl space-y-4 border border-white/6 p-8 text-center md:p-10">
         <h2 className="text-ivory font-display text-subheading font-medium">
-          Le respect de vos images avant tout
+          {t.about.privacyTitle}
         </h2>
-        <p className="text-body-sm text-slate">
-          Silhouet ne conserve aucune image. Les fichiers sont traités
-          uniquement le temps nécessaire, puis supprimés automatiquement.
-        </p>
-        <p className="text-body-sm text-ivory">Vos images restent vos images.</p>
+        <p className="text-body-sm text-slate">{t.about.privacyText}</p>
       </div>
 
       {/* For / Not for */}
       <div className="mt-20 grid max-w-5xl grid-cols-1 gap-12 md:grid-cols-2">
         <div className="space-y-4">
           <h2 className="text-ivory font-display text-subheading font-medium">
-            Conçu pour
+            {t.about.forTitle}
           </h2>
           <ul className="text-body-sm list-inside list-disc space-y-2 text-slate">
-            <li>Les créateurs de contenu</li>
-            <li>Les indépendants</li>
-            <li>Les développeurs</li>
-            <li>Les équipes produit</li>
-            <li>Toute personne ayant besoin d’images propres rapidement</li>
+            <li>{t.about.for1}</li>
+            <li>{t.about.for2}</li>
+            <li>{t.about.for3}</li>
+            <li>{t.about.for4}</li>
+            <li>{t.about.for5}</li>
           </ul>
         </div>
 
         <div className="space-y-4">
           <h2 className="text-ivory font-display text-subheading font-medium">
-            Pas pensé pour
+            {t.about.notForTitle}
           </h2>
           <ul className="text-body-sm list-inside list-disc space-y-2 text-slate">
-            <li>La retouche photo avancée</li>
-            <li>Les workflows complexes</li>
-            <li>Les outils tout-en-un surchargés</li>
+            <li>{t.about.notFor1}</li>
+            <li>{t.about.notFor2}</li>
+            <li>{t.about.notFor3}</li>
           </ul>
         </div>
       </div>
 
       {/* Conclusion */}
       <div className="mt-24 max-w-3xl space-y-4 text-center">
-        <p className="text-body text-ivory">
-          Silhouet fait volontairement peu de choses. Mais il les fait bien.
-        </p>
-        <p className="text-body-sm text-stone">
-          Un outil simple, fiable et respectueux, conçu pour disparaître
-          derrière l’usage.
-        </p>
+        <p className="text-body text-ivory">{t.about.conclusion1}</p>
+        <p className="text-body-sm text-stone">{t.about.conclusion2}</p>
       </div>
     </div>
   );

@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import Dropzone from "@/app/components/Dropzone";
 import Loader from "@/app/components/Loader";
 import { validateImageFile } from "@/lib/image";
+import { useI18n } from "@/lib/i18n";
 
 export default function ConvertImages() {
+  const { t } = useI18n();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [srcURL, setSrcURL] = useState<string | null>(null);
@@ -23,7 +25,9 @@ export default function ConvertImages() {
   async function process(file: File) {
     const validationError = validateImageFile(file);
     if (validationError) {
-      setError(validationError);
+      setError(
+        validationError === "not-image" ? t.errors.notImage : t.errors.tooLarge,
+      );
       return;
     }
 
@@ -59,7 +63,7 @@ export default function ConvertImages() {
     } catch (e: unknown) {
       URL.revokeObjectURL(objectUrl);
       console.error(e);
-      setError("La conversion a échoué. Ce format est peut-être non supporté.");
+      setError(t.errors.conversion);
     } finally {
       setBusy(false);
     }
@@ -75,17 +79,14 @@ export default function ConvertImages() {
     <section className="mx-auto flex w-full max-w-page flex-col items-center gap-12 px-6 py-16 md:py-24">
       <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
         <h1 className="text-ivory font-display text-heading font-medium sm:text-heading-lg">
-          Convertir en WebP
+          {t.convert.title}
         </h1>
-        <p className="text-body-sm text-stone">
-          Convertissez vos images PNG, JPG, GIF en WebP en un clic, sans perte
-          visible de qualité.
-        </p>
+        <p className="text-body-sm text-stone">{t.convert.subtitle}</p>
       </div>
 
       <div className="flex w-full flex-col items-center justify-center gap-8">
         <Dropzone onFile={process} />
-        {busy && <Loader label="Conversion locale en cours" />}
+        {busy && <Loader label={t.convert.loader} />}
       </div>
 
       {error && (
@@ -98,10 +99,12 @@ export default function ConvertImages() {
       {srcURL && (
         <div className="bg-soot rounded-cards grid w-full max-w-4xl grid-cols-1 gap-4 border border-white/6 p-4 sm:grid-cols-2 md:p-6">
           <figure className="flex flex-col gap-2">
-            <figcaption className="text-micro text-stone">Source</figcaption>
+            <figcaption className="text-micro text-stone">
+              {t.convert.source}
+            </figcaption>
             <Image
               src={srcURL}
-              alt="source"
+              alt={t.convert.altSource}
               className="rounded-images h-auto w-full border border-white/6"
               width={800}
               height={800}
@@ -112,12 +115,12 @@ export default function ConvertImages() {
             <div className="flex flex-col gap-4">
               <figure className="flex flex-col gap-2">
                 <figcaption className="text-micro text-stone">
-                  Résultat (WebP)
+                  {t.convert.result}
                 </figcaption>
                 <div className="checker rounded-images halo-reveal border border-white/6 p-2">
                   <Image
                     src={outURL}
-                    alt="résultat WebP"
+                    alt={t.convert.altResult}
                     className="block h-auto w-full"
                     width={800}
                     height={800}
@@ -131,14 +134,14 @@ export default function ConvertImages() {
                   className="bg-chalk text-canvas hover:bg-ivory inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-2.5 text-caption transition-colors duration-150"
                 >
                   <DownloadSimpleIcon size={20} weight="light" />
-                  Télécharger le WebP
+                  {t.convert.download}
                 </a>
                 <button
                   type="button"
                   className="border-haze text-slate hover:border-stone hover:text-ivory inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-caption transition-colors duration-150"
                   onClick={reset}
                 >
-                  <RepeatIcon size={20} weight="light" /> Réessayer
+                  <RepeatIcon size={20} weight="light" /> {t.convert.retry}
                 </button>
               </div>
             </div>

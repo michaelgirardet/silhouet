@@ -1,16 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import { useI18n } from "@/lib/i18n";
 
 export default function Footer() {
+  const { t } = useI18n();
+
   return (
     <footer className="border-t border-white/6 px-6">
       <div className="text-micro mx-auto flex max-w-page flex-col items-center justify-between gap-4 py-6 text-stone sm:flex-row">
         <p>
-          © {new Date().getFullYear()} · Silhouet · Tout droits réservés.
+          © {new Date().getFullYear()} · Silhouet · {t.footer.rights}
         </p>
         <p>
-          Photo :{" "}
+          {t.footer.photo}{" "}
           <a
             href="https://unsplash.com/fr/@rosarafael?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
             target="_blank"
@@ -34,7 +37,7 @@ export default function Footer() {
               href="/a-propos"
               className="hover:text-ivory inline-block py-2 transition-colors duration-150"
             >
-              À propos
+              {t.nav.about}
             </Link>
           </li>
         </ul>

@@ -3,7 +3,7 @@ type Props = {
   label?: string;
 };
 
-export default function Loader({ label = "Chargement…" }: Props) {
+export default function Loader({ label }: Props) {
   return (
     <div
       role="status"
@@ -13,7 +13,7 @@ export default function Loader({ label = "Chargement…" }: Props) {
       <div className="progress-track">
         <div className="progress-fill" />
       </div>
-      <p className="text-micro tnum text-stone">{label}</p>
+      {label && <p className="text-micro tnum text-stone">{label}</p>}
     </div>
   );
 }

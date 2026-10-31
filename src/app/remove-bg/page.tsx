@@ -6,6 +6,7 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import Dropzone from "@/app/components/Dropzone";
 import Modal from "@/app/components/Modal";
 import { downscaleImage, fileFromBlob, validateImageFile } from "@/lib/image";
+import { useI18n } from "@/lib/i18n";
 import Loader from "../components/Loader";
 
 // Récupère le type exact de la fonction removeBackground
@@ -22,10 +23,11 @@ type ExtendedWindow = Window & {
 };
 
 // Version du paquet de données @imgly/background-removal-data servi dans
-// public/models/<version>/ — doit correspondre au dossier extrait.
+// public/models/<version>/ : doit correspondre au dossier extrait.
 const MODELS_VERSION = "1.7.0";
 
 export default function RemoveBgPage() {
+  const { t } = useI18n();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [srcURL, setSrcURL] = useState<string | null>(null);
@@ -72,7 +74,9 @@ export default function RemoveBgPage() {
   async function process(file: File) {
     const validationError = validateImageFile(file);
     if (validationError) {
-      setError(validationError);
+      setError(
+        validationError === "not-image" ? t.errors.notImage : t.errors.tooLarge,
+      );
       return;
     }
 
@@ -105,7 +109,7 @@ export default function RemoveBgPage() {
       const result = await removerRef.current?.(prepared, config);
 
       if (!result) {
-        throw new Error("Le moteur de détourage n'est pas disponible.");
+        throw new Error(t.errors.engineUnavailable);
       }
 
       setSrcURL(URL.createObjectURL(file));
@@ -118,7 +122,7 @@ export default function RemoveBgPage() {
       setOpen(true);
     } catch (e) {
       console.error(e);
-      setError("Une erreur est survenue pendant le détourage.");
+      setError(t.errors.removal);
     } finally {
       setBusy(false);
     }
@@ -138,18 +142,15 @@ export default function RemoveBgPage() {
     <section className="mx-auto flex w-full max-w-page flex-col items-center gap-12 px-6 py-16 md:py-24">
       <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
         <h1 className="text-ivory font-display text-heading font-medium sm:text-heading-lg">
-          Déposez votre image, nous supprimons l&apos;arrière-plan
-          automatiquement.
+          {t.removeBg.title}
         </h1>
-        <p className="text-body-sm tnum text-stone">
-          PNG, JPG, WebP — jusqu&apos;à 25 Mo — traitement instantané
-        </p>
+        <p className="text-body-sm tnum text-stone">{t.removeBg.subtitle}</p>
       </div>
 
       {/* Dropzone occupe toute la largeur dispo */}
       <div className="flex w-full flex-col items-center justify-center gap-8">
         <Dropzone onFile={process} />
-        {busy && <Loader label="Modèle local — traitement en cours" />}
+        {busy && <Loader label={t.removeBg.loader} />}
       </div>
 
       {error && (
@@ -162,10 +163,12 @@ export default function RemoveBgPage() {
       {srcURL && (
         <div className="bg-soot rounded-cards grid w-full max-w-4xl grid-cols-1 gap-4 border border-white/6 p-4 sm:grid-cols-2 md:p-6">
           <figure className="flex flex-col gap-2">
-            <figcaption className="text-micro text-stone">Avant</figcaption>
+            <figcaption className="text-micro text-stone">
+              {t.removeBg.before}
+            </figcaption>
             <Image
               src={srcURL}
-              alt="source"
+              alt={t.removeBg.altSource}
               className="rounded-images h-auto w-full border border-white/6"
               width={800}
               height={800}
@@ -174,16 +177,18 @@ export default function RemoveBgPage() {
           </figure>
           {outURL && (
             <figure className="flex flex-col gap-2">
-              <figcaption className="text-micro text-stone">Après</figcaption>
+              <figcaption className="text-micro text-stone">
+                {t.removeBg.after}
+              </figcaption>
               <button
                 type="button"
                 onClick={() => setOpen(true)}
-                aria-label="Agrandir le résultat"
+                aria-label={t.removeBg.zoomAria}
                 className="checker rounded-images halo-reveal block w-full cursor-pointer border border-white/6"
               >
                 <Image
                   src={outURL}
-                  alt="résultat détouré"
+                  alt={t.removeBg.altResult}
                   className="block h-auto w-full"
                   width={800}
                   height={800}
@@ -198,7 +203,7 @@ export default function RemoveBgPage() {
       <Modal
         open={open && hasResult}
         onClose={() => setOpen(false)}
-        title="Aperçu du détourage"
+        title={t.removeBg.modalTitle}
         footer={
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
             {meta && (
@@ -218,7 +223,7 @@ export default function RemoveBgPage() {
                 className="bg-chalk text-canvas hover:bg-ivory inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-2.5 text-caption transition-colors duration-150"
               >
                 <DownloadSimpleIcon size={20} weight="light" />
-                Télécharger
+                {t.removeBg.download}
               </a>
             )}
             <button
@@ -226,7 +231,7 @@ export default function RemoveBgPage() {
               className="border-haze text-slate hover:border-stone hover:text-ivory inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-caption transition-colors duration-150"
               onClick={reset}
             >
-              <RepeatIcon size={20} weight="light" /> Réessayer
+              <RepeatIcon size={20} weight="light" /> {t.removeBg.retry}
             </button>
           </div>
         }
@@ -235,7 +240,7 @@ export default function RemoveBgPage() {
           <div className="checker halo-reveal rounded-images p-2">
             <Image
               src={outURL}
-              alt="Prévisualisation résultat"
+              alt={t.removeBg.altPreview}
               className="mx-auto block max-h-[70vh] w-auto rounded-images"
               id={id}
               width={800}
