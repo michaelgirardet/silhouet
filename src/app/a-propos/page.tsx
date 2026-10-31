@@ -5,9 +5,9 @@ export default function About() {
     <div className="mx-auto flex max-w-page flex-col items-center px-6 py-16 md:py-24">
       {/* Hero */}
       <div className="max-w-3xl space-y-6 text-center">
-        <h2 className="text-ivory font-display text-heading-lg font-medium">
+        <h1 className="text-ivory font-display text-heading font-medium sm:text-heading-lg">
           Un outil simple pour des images propres
-        </h2>
+        </h1>
 
         <p className="text-body text-slate">
           Silhouet est un outil en ligne conçu pour une seule chose : supprimer
@@ -23,9 +23,9 @@ export default function About() {
       {/* Problem / Philosophy */}
       <div className="mt-20 grid max-w-5xl grid-cols-1 gap-12 md:grid-cols-2">
         <div className="space-y-4">
-          <h3 className="text-ivory font-display text-subheading font-medium">
+          <h2 className="text-ivory font-display text-subheading font-medium">
             Le problème
-          </h3>
+          </h2>
           <ul className="text-body-sm list-inside list-disc space-y-2 text-slate">
             <li>Des inscriptions inutiles</li>
             <li>Des quotas peu clairs</li>
@@ -39,9 +39,9 @@ export default function About() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-ivory font-display text-subheading font-medium">
+          <h2 className="text-ivory font-display text-subheading font-medium">
             La philosophie
-          </h3>
+          </h2>
           <p className="text-body-sm text-slate">
             Un outil direct, transparent et respectueux de l’utilisateur.
           </p>
@@ -65,9 +65,9 @@ export default function About() {
 
       {/* Privacy */}
       <div className="bg-soot rounded-cards mt-20 max-w-3xl space-y-4 border border-white/6 p-8 text-center md:p-10">
-        <h3 className="text-ivory font-display text-subheading font-medium">
+        <h2 className="text-ivory font-display text-subheading font-medium">
           Le respect de vos images avant tout
-        </h3>
+        </h2>
         <p className="text-body-sm text-slate">
           Silhouet ne conserve aucune image. Les fichiers sont traités
           uniquement le temps nécessaire, puis supprimés automatiquement.
@@ -78,9 +78,9 @@ export default function About() {
       {/* For / Not for */}
       <div className="mt-20 grid max-w-5xl grid-cols-1 gap-12 md:grid-cols-2">
         <div className="space-y-4">
-          <h3 className="text-ivory font-display text-subheading font-medium">
+          <h2 className="text-ivory font-display text-subheading font-medium">
             Conçu pour
-          </h3>
+          </h2>
           <ul className="text-body-sm list-inside list-disc space-y-2 text-slate">
             <li>Les créateurs de contenu</li>
             <li>Les indépendants</li>
@@ -91,9 +91,9 @@ export default function About() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-ivory font-display text-subheading font-medium">
+          <h2 className="text-ivory font-display text-subheading font-medium">
             Pas pensé pour
-          </h3>
+          </h2>
           <ul className="text-body-sm list-inside list-disc space-y-2 text-slate">
             <li>La retouche photo avancée</li>
             <li>Les workflows complexes</li>

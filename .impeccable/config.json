@@ -1,0 +1,20 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-10-31T12:07:50.183Z",
+        "reason": "Brand body font per .vibe/DESIGN.md"
+      },
+      {
+        "rule": "overused-font",
+        "value": "space grotesk",
+        "createdAt": "2026-10-31T12:07:51.101Z",
+        "reason": "Brand display font per .vibe/DESIGN.md"
+      }
+    ]
+  }
+}

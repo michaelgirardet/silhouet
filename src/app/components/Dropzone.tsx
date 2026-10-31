@@ -48,7 +48,7 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
       <div className="text-micro text-stone">
         PNG, JPG, WebP — jusqu&apos;à 25 Mo
       </div>
-      <div className="text-micro text-stone mt-4">
+      <div className="text-micro leading-[1.3] text-stone mt-4">
         Tout se passe dans votre navigateur — aucune image envoyée sur un
         serveur
       </div>

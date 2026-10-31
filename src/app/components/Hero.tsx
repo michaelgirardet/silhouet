@@ -48,7 +48,7 @@ function Hero() {
           priority
         />
       </div>
-      <p className="text-micro text-stone">
+      <p className="text-micro leading-[1.3] text-stone">
         Tout se passe dans votre navigateur — aucune image envoyée sur un
         serveur
       </p>

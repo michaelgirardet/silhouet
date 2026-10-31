@@ -33,7 +33,7 @@ export default function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-stone hover:text-ivory text-caption transition-colors duration-150"
+                className="text-stone hover:text-ivory inline-block py-2 text-caption transition-colors duration-150"
               >
                 {link.label}
               </Link>

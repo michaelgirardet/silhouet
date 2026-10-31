@@ -6,9 +6,9 @@ export default function Contact() {
   return (
     <div className="flex flex-col items-center px-6 py-20 md:py-32">
       <div className="max-w-3xl space-y-6 text-center">
-        <h2 className="text-ivory font-display text-heading-lg font-medium">
+        <h1 className="text-ivory font-display text-heading font-medium sm:text-heading-lg">
           Nous contacter
-        </h2>
+        </h1>
         <p className="text-body text-slate">
           Une question, un retour ou une idée d&apos;amélioration ?
         </p>

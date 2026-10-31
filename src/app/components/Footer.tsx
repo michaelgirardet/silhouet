@@ -24,7 +24,7 @@ export default function Footer() {
           <li>
             <Link
               href="/contact"
-              className="hover:text-ivory transition-colors duration-150"
+              className="hover:text-ivory inline-block py-2 transition-colors duration-150"
             >
               Contact
             </Link>
@@ -32,7 +32,7 @@ export default function Footer() {
           <li>
             <Link
               href="/a-propos"
-              className="hover:text-ivory transition-colors duration-150"
+              className="hover:text-ivory inline-block py-2 transition-colors duration-150"
             >
               À propos
             </Link>

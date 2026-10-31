@@ -74,7 +74,7 @@ export default function ConvertImages() {
   return (
     <section className="mx-auto flex w-full max-w-page flex-col items-center gap-12 px-6 py-16 md:py-24">
       <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
-        <h1 className="text-ivory font-display text-heading-lg font-medium">
+        <h1 className="text-ivory font-display text-heading font-medium sm:text-heading-lg">
           Convertir en WebP
         </h1>
         <p className="text-body-sm text-stone">

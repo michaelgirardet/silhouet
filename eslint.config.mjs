@@ -20,6 +20,8 @@ const eslintConfig = [
 			"next-env.d.ts",
 			// Script e2e Node CommonJS, hors périmètre du lint applicatif
 			"scripts/**",
+			// Skill impeccable (scripts utilitaires tiers, hors périmètre app)
+			".vibe/**",
 		],
 	},
 ];

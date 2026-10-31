@@ -85,6 +85,17 @@ body {
   outline-offset: 2px;
 }
 
+/* Césures typographiques : titres équilibrés, paragraphes sans ligne veuve */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
 /* Chiffres tabulaires pour temps, tailles et compteurs */
 .tnum {
   font-feature-settings: "tnum";
@@ -130,6 +141,7 @@ body {
   position: absolute;
   top: 0;
   bottom: 0;
+  left: 0;
   width: 40%;
   border-radius: 999px;
   background: linear-gradient(
@@ -137,15 +149,16 @@ body {
     var(--color-amber-deep),
     var(--color-amber)
   );
+  /* transform (composited) plutôt que left : pas de reflow par frame */
   animation: progress-slide 1.4s ease-in-out infinite;
 }
 
 @keyframes progress-slide {
   0% {
-    left: -40%;
+    transform: translateX(-100%);
   }
   100% {
-    left: 100%;
+    transform: translateX(250%);
   }
 }
 
@@ -174,5 +187,21 @@ body {
   }
   100% {
     transform: translateX(0%);
+  }
+}
+
+/* Sensibilité au mouvement : les animations d'entrée disparaissent, la
+   progression garde un état figé lisible (remplissage partiel) — l'état
+   de chargement reste transmis par la pilule et son libellé micro. */
+@media (prefers-reduced-motion: reduce) {
+  .moveup,
+  .slidein,
+  .halo-reveal {
+    animation: none;
+  }
+
+  .progress-fill {
+    animation: none;
+    opacity: 0.6;
   }
 }
