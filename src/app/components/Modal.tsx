@@ -75,7 +75,7 @@ export default function Modal({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="border/20 animate-in fade-in relative w-full max-w-3xl rounded-xl bg-white text-lg shadow-2xl duration-150"
+        className="border/20 bg-[var(--page-bg)] animate-in fade-in relative w-full max-w-3xl rounded-xl text-lg shadow-2xl duration-150"
       >
         <div className="bg-indigo border-border flex items-center justify-between rounded-t-2xl p-4 text-white md:p-5">
           <div className="text-base font-semibold md:text-lg">{title}</div>

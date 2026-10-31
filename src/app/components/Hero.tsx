@@ -7,17 +7,17 @@ function Hero() {
   return (
     <section className="flex flex-col items-center justify-center gap-16">
       <div className="flex flex-col items-center justify-center gap-8">
-        <h2 className="text-background text-6xl font-bold">
+        <h1 className="text-[var(--page-text)] text-6xl font-bold">
           Détourage précis et instantané.
-        </h2>
-        <h3 className="text-4xl font-medium">
+        </h1>
+        <h2 className="text-4xl font-medium">
           Sans compte. Sans limite. Sans stockage{" "}
-        </h3>
-        <h4 className="text-xl">
+        </h2>
+        <h3 className="text-xl">
           Supprimez l&apos;arrière plan de vos images en quelques secondes.
           <br />
           PNG et WebP transparents prêts à l&apos;usage
-        </h4>
+        </h3>
         <div className="flex items-center gap-8">
           <Link href={"/remove-bg"}>
             <button

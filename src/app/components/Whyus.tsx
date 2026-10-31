@@ -1,4 +1,4 @@
-import { LightningIcon, ShieldIcon, ShieldSlashIcon, StarIcon } from "@phosphor-icons/react";
+import { LightningIcon, ShieldSlashIcon, StarIcon } from "@phosphor-icons/react";
 import React from "react";
 
 const whyUsContent = [

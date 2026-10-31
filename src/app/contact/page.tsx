@@ -6,10 +6,10 @@ export default function Contact() {
       {/* Header */}
       <div className="max-w-3xl space-y-4 text-center">
         <h2 className="text-3xl font-medium">Nous contacter</h2>
-        <p className="text-gray-600">
+        <p className="text-gray-600 dark:text-gray-300">
           Une question, un retour ou une idée d’amélioration ?
         </p>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
           Vos informations ne sont utilisées que pour vous répondre.
         </p>
       </div>
@@ -20,19 +20,19 @@ export default function Contact() {
         onSubmit={(e) => e.preventDefault()}
       >
         <div className="space-y-2">
-          <label htmlFor="name" className="text-sm text-gray-600">
+          <label htmlFor="name" className="text-sm text-gray-600 dark:text-gray-300">
             Nom
           </label>
           <input
             id="name"
             type="text"
             placeholder="Votre nom"
-            className="w-full rounded-md border border-gray-200 px-4 py-3 text-sm focus:border-gray-400 focus:outline-none"
+            className="w-full rounded-md border border-gray-200 dark:border-gray-600 px-4 py-3 text-sm focus:border-gray-400 focus:outline-none"
           />
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="email" className="text-sm text-gray-600">
+          <label htmlFor="email" className="text-sm text-gray-600 dark:text-gray-300">
             Email
           </label>
           <input
@@ -40,12 +40,12 @@ export default function Contact() {
             type="email"
             required
             placeholder="votre@email.com"
-            className="w-full rounded-md border border-gray-200 px-4 py-3 text-sm focus:border-gray-400 focus:outline-none"
+            className="w-full rounded-md border border-gray-200 dark:border-gray-600 px-4 py-3 text-sm focus:border-gray-400 focus:outline-none"
           />
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="message" className="text-sm text-gray-600">
+          <label htmlFor="message" className="text-sm text-gray-600 dark:text-gray-300">
             Message
           </label>
           <textarea
@@ -53,13 +53,13 @@ export default function Contact() {
             required
             rows={5}
             placeholder="Votre message"
-            className="w-full resize-none rounded-md border border-gray-200 px-4 py-3 text-sm focus:border-gray-400 focus:outline-none"
+            className="w-full resize-none rounded-md border border-gray-200 dark:border-gray-600 px-4 py-3 text-sm focus:border-gray-400 focus:outline-none"
           />
         </div>
 
         <button
           type="submit"
-          className="mt-4 w-full rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-gray-800"
+          className="mt-4 w-full rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-white"
         >
           Envoyer le message
         </button>

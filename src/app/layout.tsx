@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { Manrope } from "next/font/google";
+import { ThemeProvider } from "next-themes";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -14,7 +15,7 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: "Silhouet",
-  description: "Reveal the form, forget the background.",
+  description: "Révélez la forme, oubliez l'arrière-plan.",
 };
 
 export default function RootLayout({
@@ -25,13 +26,19 @@ export default function RootLayout({
   return (
     <html lang="fr" className={manrope.variable} suppressHydrationWarning>
       <body>
-        <div className="flex min-h-screen flex-col justify-between">
-          <Navbar />
-          <main>
-            {children} <Analytics />
-          </main>
-          <Footer />
-        </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+        >
+          <div className="flex min-h-screen flex-col justify-between">
+            <Navbar />
+            <main>
+              {children} <Analytics />
+            </main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

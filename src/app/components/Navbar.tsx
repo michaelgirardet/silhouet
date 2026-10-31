@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { ListIcon, XIcon } from "@phosphor-icons/react";
 import { useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [burgerMenu, setBurgerMenu] = useState<boolean>(false);
@@ -12,9 +13,11 @@ export default function Navbar() {
 
   return (
     <nav>
-      <div className="mx-auto flex h-18 max-w-6xl items-center justify-center">
+      <div className="mx-auto flex h-18 max-w-6xl items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
-          <h1 className="text-3xl font-bold text-black">Silhouet</h1>
+          <span className="text-3xl font-bold text-black dark:text-white">
+            Silhouet
+          </span>
         </Link>
 
         {/* <nav className="md:text-md hidden items-center justify-between gap-4 text-base font-medium md:flex md:gap-8">
@@ -41,19 +44,22 @@ export default function Navbar() {
             </li>
           </ul>
         </nav> */}
-        <button
-          type="button"
-          onClick={handleSetBurgerMenu}
-          className="md:hidden"
-          aria-label="open mobile menu"
-        >
-          <ListIcon size={32} />
-        </button>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={handleSetBurgerMenu}
+            className="md:hidden"
+            aria-label="open mobile menu"
+          >
+            <ListIcon size={32} />
+          </button>
+        </div>
       </div>
 
       {/* BURGER MENU  */}
       {burgerMenu && (
-        <div className="slidein absolute inset-0 z-50 h-screen w-full gap-8 bg-white p-4 md:hidden">
+        <div className="slidein bg-[var(--page-bg)] absolute inset-0 z-50 h-screen w-full gap-8 p-4 md:hidden">
           <span
             className="flex w-full justify-between"
             onClick={handleSetBurgerMenu}

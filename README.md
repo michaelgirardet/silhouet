@@ -49,7 +49,7 @@ Le traitement est effectué localement dans le navigateur grâce à WebAssembly 
 ### 1. Cloner le dépôt
 
 ```bash
-git clone https://github.com/ton-pseudo/silhouet.git
+git clone https://github.com/michaelgirardet/silhouet.git
 cd silhouet
 ```
 

@@ -2,9 +2,10 @@
 
 import { DownloadSimpleIcon } from "@phosphor-icons/react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dropzone from "@/app/components/Dropzone";
 import Loader from "@/app/components/Loader";
+import { validateImageFile } from "@/lib/image";
 
 export default function ConvertImages() {
   const [busy, setBusy] = useState(false);
@@ -12,19 +13,33 @@ export default function ConvertImages() {
   const [srcURL, setSrcURL] = useState<string | null>(null);
   const [outURL, setOutURL] = useState<string | null>(null);
 
+  useEffect(() => {
+    return () => {
+      if (srcURL) URL.revokeObjectURL(srcURL);
+      if (outURL) URL.revokeObjectURL(outURL);
+    };
+  }, [srcURL, outURL]);
+
   async function process(file: File) {
+    const validationError = validateImageFile(file);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     setBusy(true);
     setError(null);
     setSrcURL(null);
     setOutURL(null);
 
+    const objectUrl = URL.createObjectURL(file);
+    const img = document.createElement("img");
+
     try {
-      // Crée un élément <img> temporaire
-      const img = document.createElement("img");
       await new Promise<void>((resolve, reject) => {
         img.onload = () => resolve();
-        img.onerror = reject;
-        img.src = URL.createObjectURL(file);
+        img.onerror = () => reject(new Error("Image illisible"));
+        img.src = objectUrl;
       });
 
       // Création du canvas
@@ -41,17 +56,12 @@ export default function ConvertImages() {
 
       if (!blob) throw new Error("Conversion WebP échouée");
 
-      setSrcURL(URL.createObjectURL(file));
+      setSrcURL(objectUrl);
       setOutURL(URL.createObjectURL(blob));
-
-      // Nettoyage
-      URL.revokeObjectURL(img.src);
     } catch (e: unknown) {
-      if (e instanceof Error) {
-        console.error(e.message);
-      } else {
-        console.error(e);
-      }
+      URL.revokeObjectURL(objectUrl);
+      console.error(e);
+      setError("La conversion a échoué. Ce format est peut-être non supporté.");
     } finally {
       setBusy(false);
     }
@@ -125,7 +135,7 @@ export default function ConvertImages() {
                 </a>
                 <button
                   type="button"
-                  className="md:text-md hover:text-indigo mt-3 cursor-pointer items-center justify-center gap-4 rounded-md border border-none bg-white px-4 py-2 text-sm font-semibold transition duration-300 ease-in-out"
+                  className="md:text-md hover:text-indigo dark:hover:text-indigo-300 mt-3 cursor-pointer items-center justify-center gap-4 rounded-md border border-none bg-[var(--page-bg)] px-4 py-2 text-sm font-semibold transition duration-300 ease-in-out"
                   onClick={reset}
                 >
                   ↺ Recommencer

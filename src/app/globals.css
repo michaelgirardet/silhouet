@@ -1,10 +1,19 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #20222b;
   --grey: #3a3f44;
   --accent: #9f774e;
   --white: #fcfcfe;
+  --page-bg: #fcfcfe;
+  --page-text: #050e0e;
+}
+
+.dark {
+  --page-bg: #20222b;
+  --page-text: #fcfcfe;
 }
 
 @theme inline {
@@ -16,8 +25,8 @@
 }
 
 body {
-  background: #fcfcfe;
-  color: #050e0e;
+  background: var(--page-bg);
+  color: var(--page-text);
   font-family: "Manrope", sans-serif;
 }
 ::selection {
