@@ -21,6 +21,16 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Silhouet",
   description: "Révélez la forme, oubliez l'arrière-plan.",
+  openGraph: {
+    title: "Silhouet",
+    description:
+      "Détourage d'images 100 % local — aucune image envoyée sur un serveur.",
+    images: ["/og.png"],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export const viewport: Viewport = {

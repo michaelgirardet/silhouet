@@ -20,8 +20,17 @@ export default function Navbar() {
     <header className="bg-canvas/80 sticky top-0 z-40 border-b border-white/6 backdrop-blur-xl">
       <nav className="mx-auto flex h-[72px] max-w-page items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-3">
-          <span aria-hidden className="text-ivory text-xl">
-            ◐
+          <span aria-hidden className="text-ivory inline-flex h-6 w-6">
+            <svg viewBox="0 0 256 256" className="h-full w-full">
+              <path
+                fill="currentColor"
+                d="M128 24 A104 104 0 0 0 128 232 Z"
+              />
+              <path
+                fill="currentColor"
+                d="M128 24 A104 104 0 0 1 128 232 L128 158 A74 74 0 0 0 128 54 Z"
+              />
+            </svg>
           </span>
           <span className="text-ivory font-display text-caption tracking-micro font-medium">
             SILHUET
