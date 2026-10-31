@@ -2,7 +2,12 @@
 import Link from "next/link";
 import { ListIcon, XIcon } from "@phosphor-icons/react";
 import { useState } from "react";
-import ThemeToggle from "./ThemeToggle";
+
+const links = [
+  { href: "/remove-bg", label: "Détourer" },
+  { href: "/convert", label: "Convertir" },
+  { href: "/a-propos", label: "À propos" },
+];
 
 export default function Navbar() {
   const [burgerMenu, setBurgerMenu] = useState<boolean>(false);
@@ -12,85 +17,91 @@ export default function Navbar() {
   };
 
   return (
-    <nav>
-      <div className="mx-auto flex h-18 max-w-6xl items-center justify-between">
+    <header className="bg-canvas/80 sticky top-0 z-40 border-b border-white/6 backdrop-blur-xl">
+      <nav className="mx-auto flex h-[72px] max-w-page items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-3">
-          <span className="text-3xl font-bold text-black dark:text-white">
-            Silhouet
+          <span aria-hidden className="text-ivory text-xl">
+            ◐
+          </span>
+          <span className="text-ivory font-display text-caption tracking-micro font-medium">
+            SILHUET
           </span>
         </Link>
 
-        {/* <nav className="md:text-md hidden items-center justify-between gap-4 text-base font-medium md:flex md:gap-8">
-          <ul className="flex items-center justify-center gap-4">
-            <li>
-              <a
-                href="/remove-bg"
-                className={
-                  "hover:text-indigo rounded-full bg-white px-4 py-2 font-semibold shadow-sm transition duration-300 ease-in-out"
-                }
+        <ul className="hidden items-center gap-8 md:flex">
+          {links.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className="text-stone hover:text-ivory text-caption transition-colors duration-150"
               >
-                Supprimer l&apos;arrière plan
-              </a>
+                {link.label}
+              </Link>
             </li>
-            <li>
-              <a
-                href="/convert"
-                className={
-                  "hover:bg-indigo/80 bg-indigo rounded-full px-4 py-2 font-semibold text-white shadow-sm transition duration-300 ease-in-out"
-                }
-              >
-                Convertir en WebP
-              </a>
-            </li>
-          </ul>
-        </nav> */}
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
+          ))}
+        </ul>
+
+        <div className="flex items-center gap-4">
+          <Link
+            href="/remove-bg"
+            className="bg-chalk text-canvas hover:bg-ivory hidden rounded-full px-5 py-2.5 text-caption transition-colors duration-150 md:inline-flex"
+          >
+            Ouvrir l&apos;outil
+          </Link>
           <button
             type="button"
             onClick={handleSetBurgerMenu}
-            className="md:hidden"
+            className="text-slate md:hidden"
             aria-label="open mobile menu"
           >
-            <ListIcon size={32} />
+            <ListIcon size={28} weight="light" />
           </button>
         </div>
-      </div>
+      </nav>
 
       {/* BURGER MENU  */}
       {burgerMenu && (
-        <div className="slidein bg-[var(--page-bg)] absolute inset-0 z-50 h-screen w-full gap-8 p-4 md:hidden">
-          <span
-            className="flex w-full justify-between"
-            onClick={handleSetBurgerMenu}
-          >
-            <h3 className="text-indigo text-3xl font-semibold">Silhouet</h3>
-            <XIcon size={38} />
+        <div className="bg-canvas slidein fixed inset-0 z-50 flex h-screen w-full flex-col gap-8 p-6 md:hidden">
+          <span className="flex w-full items-center justify-between">
+            <span className="text-ivory font-display text-heading font-medium">
+              Silhouet
+            </span>
+            <button
+              type="button"
+              onClick={handleSetBurgerMenu}
+              className="text-slate cursor-pointer"
+              aria-label="Fermer le menu"
+            >
+              <XIcon size={32} weight="light" />
+            </button>
           </span>
 
-          <ul className="flex flex-col gap-8 px-8 py-24 text-xl font-semibold">
-            <Link href={"/"} onClick={handleSetBurgerMenu}>
-              <li>Accueil</li>
-            </Link>
-
-            <Link href={"/remove-bg"} onClick={handleSetBurgerMenu}>
-              <li>Supprimer arrière plan</li>
-            </Link>
-
-            <Link href={"/convert"} onClick={handleSetBurgerMenu}>
-              <li>Convertir en WebP</li>
-            </Link>
+          <ul className="text-ivory mt-24 flex flex-col gap-8 px-4 text-xl font-medium">
+            <li>
+              <Link href="/" onClick={handleSetBurgerMenu}>
+                Accueil
+              </Link>
+            </li>
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} onClick={handleSetBurgerMenu}>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
-          <div className="flex w-full items-center justify-center">
-            <button
-              className="border-rose text-rose flex h-14 w-48 items-center justify-center rounded-full border font-semibold"
-              onClick={() => setBurgerMenu(!burgerMenu)}
+
+          <div className="mt-auto flex w-full items-center justify-center">
+            <Link
+              href="/remove-bg"
+              onClick={handleSetBurgerMenu}
+              className="bg-chalk text-canvas hover:bg-ivory flex h-14 w-48 items-center justify-center rounded-full text-caption transition-colors duration-150"
             >
-              Retour
-            </button>
+              Ouvrir l&apos;outil
+            </Link>
           </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 }

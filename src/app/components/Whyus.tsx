@@ -1,22 +1,22 @@
-import { LightningIcon, ShieldSlashIcon, StarIcon } from "@phosphor-icons/react";
-import React from "react";
+import {
+  LightningIcon,
+  ShieldSlashIcon,
+  StarIcon,
+} from "@phosphor-icons/react";
 
 const whyUsContent = [
   {
-    id: 1,
-    icon: <LightningIcon size={32} />,
+    icon: <LightningIcon size={24} weight="light" />,
     title: "Rapide",
     text: "Détourage automatique en quelques secondes",
   },
   {
-    id: 1,
-    icon: <StarIcon size={32} />,
+    icon: <StarIcon size={24} weight="light" />,
     title: "Précis",
     text: "Bords nets, détails respectés",
   },
   {
-    id: 1,
-    icon: <ShieldSlashIcon size={32} />,
+    icon: <ShieldSlashIcon size={24} weight="light" />,
     title: "Respect de la vie privée",
     text: "Images traitées puis supprimées",
   },
@@ -24,29 +24,35 @@ const whyUsContent = [
 
 function Whyus() {
   return (
-    <div className="flex flex-col items-center justify-center gap-24">
-      <h3 className="text-5xl">
-        Pourquoi <span className="font-medium">Silhouet ?</span>
-      </h3>
+    <div className="flex flex-col items-center gap-16 px-6 pb-32">
+      <h2 className="text-ivory font-display text-subheading font-medium">
+        Pourquoi Silhouet ?
+      </h2>
 
-      <div className="grid grid-cols-1 content-center gap-8 md:grid-cols-3">
-        {whyUsContent.map((item, index) => (
+      <div className="grid w-full max-w-page grid-cols-1 gap-4 md:grid-cols-3">
+        {whyUsContent.map((item) => (
           <article
-            key={index}
-            className="flex max-w-64 cursor-pointer flex-col items-center gap-4 rounded-lg p-8 text-center shadow-lg transition duration-300 ease-in-out hover:scale-105"
+            key={item.title}
+            className="bg-soot flex flex-col items-center gap-4 rounded-cards border border-white/6 p-8 text-center"
           >
-            <div>{item.icon}</div>
-            <h4 className="font-semibold text-lg">{item.title}</h4>
-            <p>{item.text}</p>
+            <div aria-hidden className="text-ivory">
+              {item.icon}
+            </div>
+            <h3 className="text-ivory font-display text-caption font-medium">
+              {item.title}
+            </h3>
+            <p className="text-body-sm text-stone">{item.text}</p>
           </article>
         ))}
       </div>
 
-      <div className="flex w-full flex-col items-center justify-center text-center">
-        <h4 className="text-lg">
-          Formats supportés: PNG, JPG, WEBP - Jusqu&apos;à 25MB
-        </h4>
-        <h5 className="text-grey/80">Vos images ne sont jamais conservées.</h5>
+      <div className="flex w-full flex-col items-center justify-center gap-2 text-center">
+        <p className="text-micro tnum text-slate">
+          Formats supportés : PNG, JPG, WEBP — jusqu&apos;à 25 Mo
+        </p>
+        <p className="text-micro text-stone">
+          Vos images ne sont jamais conservées.
+        </p>
       </div>
     </div>
   );

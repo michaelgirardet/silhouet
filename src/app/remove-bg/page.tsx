@@ -30,13 +30,11 @@ export default function RemoveBgPage() {
   const [error, setError] = useState<string | null>(null);
   const [srcURL, setSrcURL] = useState<string | null>(null);
   const [outURL, setOutURL] = useState<string | null>(null);
+  const [meta, setMeta] = useState<{ name: string; size: number; ms: number } | null>(
+    null,
+  );
   const [open, setOpen] = useState(false);
-  const removerRef =
-    useRef<
-      ReturnType<typeof useRef<RemoveBackgroundFn | null>> extends never
-        ? never
-        : RemoveBackgroundFn | null
-    >(null);
+  const removerRef = useRef<RemoveBackgroundFn | null>(null);
   const id = useId();
 
   useEffect(() => {
@@ -80,6 +78,7 @@ export default function RemoveBgPage() {
 
     setBusy(true);
     setError(null);
+    const startedAt = performance.now();
     try {
       const down = await downscaleImage(file, 2000);
       const prepared = down.size
@@ -97,8 +96,10 @@ export default function RemoveBgPage() {
       // @imgly/background-removal-data change d'URL, ce qui permet un cache
       // immutable sans risque de péremption.
       const config = {
-        publicPath: new URL(`/models/${MODELS_VERSION}/`, window.location.origin)
-          .href,
+        publicPath: new URL(
+          `/models/${MODELS_VERSION}/`,
+          window.location.origin,
+        ).href,
         output: { format: "image/png" as const },
       };
       const result = await removerRef.current?.(prepared, config);
@@ -109,6 +110,11 @@ export default function RemoveBgPage() {
 
       setSrcURL(URL.createObjectURL(file));
       setOutURL(URL.createObjectURL(result));
+      setMeta({
+        name: file.name,
+        size: result.size,
+        ms: performance.now() - startedAt,
+      });
       setOpen(true);
     } catch (e) {
       console.error(e);
@@ -120,70 +126,70 @@ export default function RemoveBgPage() {
 
   const hasResult = useMemo(() => !!(srcURL && outURL), [srcURL, outURL]);
 
-  const openModale = () => {
-    setOpen(true);
+  const reset = () => {
+    setSrcURL(null);
+    setOutURL(null);
+    setMeta(null);
+    setError(null);
+    setOpen(false);
   };
 
   return (
-    <section className="flex w-full flex-col items-center justify-center">
-      <div className="shadow-soft max-w-242 rounded-lg p-6 py-24 text-left text-2xl">
-        <h1 className="mb-1 text-3xl font-bold sm:text-4xl">
-          Déposez votre image, nous supprimons l&apos;arrière plan
+    <section className="mx-auto flex w-full max-w-page flex-col items-center gap-12 px-6 py-16 md:py-24">
+      <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
+        <h1 className="text-ivory font-display text-heading-lg font-medium">
+          Déposez votre image, nous supprimons l&apos;arrière-plan
           automatiquement.
         </h1>
-        <p className="text-base opacity-80 sm:text-lg">
-          PNG, JPG, WebP - Jusqu&apos;à 25 Mo - Traitement instantané
+        <p className="text-body-sm tnum text-stone">
+          PNG, JPG, WebP — jusqu&apos;à 25 Mo — traitement instantané
         </p>
       </div>
 
       {/* Dropzone occupe toute la largeur dispo */}
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex w-full flex-col items-center justify-center gap-8">
         <Dropzone onFile={process} />
-        <div className="mt-24 flex w-full items-center justify-center">
-          {busy && <Loader />}
-        </div>
+        {busy && <Loader label="Modèle local — traitement en cours" />}
       </div>
 
       {error && (
-        <div className="border-border rounded-md border p-3 text-sm text-[color:var(--color-danger,oklch(0.6_0.2_25))] md:col-span-2">
+        <div className="bg-ash rounded-inputs border-haze/60 w-full max-w-3xl border p-3 text-caption text-slate">
           <p>{error}</p>
         </div>
       )}
 
-      {/* Vignettes de résultat*/}
+      {/* Comparateur avant/après */}
       {srcURL && (
-        <div className="mx-auto grid max-w-[768px] grid-cols-1 gap-4 sm:grid-cols-2">
-          <div>
-            <div className="mb-1 text-sm font-medium opacity-80">Source</div>
+        <div className="bg-soot rounded-cards grid w-full max-w-4xl grid-cols-1 gap-4 border border-white/6 p-4 sm:grid-cols-2 md:p-6">
+          <figure className="flex flex-col gap-2">
+            <figcaption className="text-micro text-stone">Avant</figcaption>
             <Image
               src={srcURL}
               alt="source"
-              className="border-border block h-auto w-full rounded-lg border"
+              className="rounded-images h-auto w-full border border-white/6"
               width={800}
               height={800}
               priority
             />
-          </div>
+          </figure>
           {outURL && (
-            <div>
-              <div className="mb-1 text-sm font-medium opacity-80">
-                Résultat
-              </div>
+            <figure className="flex flex-col gap-2">
+              <figcaption className="text-micro text-stone">Après</figcaption>
               <button
                 type="button"
-                onClick={openModale}
+                onClick={() => setOpen(true)}
                 aria-label="Agrandir le résultat"
-                className="u-checker border-indigo block w-full cursor-pointer rounded-lg border p-2"
+                className="checker rounded-images halo-reveal block w-full cursor-pointer border border-white/6"
               >
                 <Image
                   src={outURL}
-                  alt="résultat"
-                  className="block h-auto w-full rounded-md"
+                  alt="résultat détouré"
+                  className="block h-auto w-full"
                   width={800}
                   height={800}
                 />
               </button>
-            </div>
+            </figure>
           )}
         </div>
       )}
@@ -194,40 +200,43 @@ export default function RemoveBgPage() {
         onClose={() => setOpen(false)}
         title="Aperçu du détourage"
         footer={
-          <>
-            <div className="flex">
-              {outURL && (
-                <a
-                  href={outURL}
-                  download="silhouet-no-bg.png"
-                  className="md:text-md flex bg-accent cursor-pointer items-center justify-center gap-4 rounded-md px-4 py-2 text-sm font-semibold text-white transition duration-300 ease-in-out"
-                >
-                  <DownloadSimpleIcon size={24} />
-                  Télécharger le PNG
-                </a>
-              )}
-              <button
-                type="button"
-                className="md:text-md flex cursor-pointer items-center justify-center gap-4 rounded-md border border-none bg-[var(--page-bg)] px-4 py-2 text-sm font-semibold transition duration-300 ease-in-out hover:text-black/80 dark:hover:text-white/80"
-                onClick={() => {
-                  setSrcURL(null);
-                  setOutURL(null);
-                  setError(null);
-                  setOpen(false);
-                }}
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+            {meta && (
+              <p className="text-micro tnum text-stone mr-auto">
+                {meta.name} · {(meta.size / 1024 / 1024).toFixed(1)} Mo ·{" "}
+                {(meta.ms / 1000).toLocaleString("fr-FR", {
+                  maximumFractionDigits: 1,
+                  minimumFractionDigits: 1,
+                })}{" "}
+                s
+              </p>
+            )}
+            {outURL && (
+              <a
+                href={outURL}
+                download="silhouet-no-bg.png"
+                className="bg-chalk text-canvas hover:bg-ivory inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-2.5 text-caption transition-colors duration-150"
               >
-                <RepeatIcon size={24} /> Recommencer
-              </button>
-            </div>
-          </>
+                <DownloadSimpleIcon size={20} weight="light" />
+                Télécharger
+              </a>
+            )}
+            <button
+              type="button"
+              className="border-haze text-slate hover:border-stone hover:text-ivory inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-caption transition-colors duration-150"
+              onClick={reset}
+            >
+              <RepeatIcon size={20} weight="light" /> Réessayer
+            </button>
+          </div>
         }
       >
         {hasResult && outURL && (
-          <div className="u-checker rounded-md p-2">
+          <div className="checker halo-reveal rounded-images p-2">
             <Image
               src={outURL}
               alt="Prévisualisation résultat"
-              className="mx-auto block max-h-[70vh] w-auto rounded"
+              className="mx-auto block max-h-[70vh] w-auto rounded-images"
               id={id}
               width={800}
               height={800}

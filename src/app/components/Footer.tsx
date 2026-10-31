@@ -1,35 +1,44 @@
 "use client";
 
-import { EnvelopeIcon, QuestionIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="text-grey dark:text-[#98a1a9] flex h-16 items-center justify-evenly gap-24 py-2 text-sm">
-      <div className="flex">
-        <p>Crédit Photo: </p>
-        <a
-          href="https://unsplash.com/fr/@rosarafael?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-          target="_blank"
-        >
-          Rosa Rafael
-        </a>
+    <footer className="border-t border-white/6 px-6">
+      <div className="text-micro mx-auto flex max-w-page flex-col items-center justify-between gap-4 py-6 text-stone sm:flex-row">
+        <p>
+          © {new Date().getFullYear()} · Silhouet · Tout droits réservés.
+        </p>
+        <p>
+          Photo :{" "}
+          <a
+            href="https://unsplash.com/fr/@rosarafael?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+            target="_blank"
+            className="hover:text-ivory underline decoration-white/6 underline-offset-2 transition-colors duration-150"
+            rel="noreferrer"
+          >
+            Rosa Rafael
+          </a>
+        </p>
+        <ul className="flex items-center gap-6">
+          <li>
+            <Link
+              href="/contact"
+              className="hover:text-ivory transition-colors duration-150"
+            >
+              Contact
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/a-propos"
+              className="hover:text-ivory transition-colors duration-150"
+            >
+              À propos
+            </Link>
+          </li>
+        </ul>
       </div>
-      <p>© {new Date().getFullYear()} · Silhouet · Tout droits réservés.</p>
-      <ul className="flex gap-8">
-        <Link href={"/contact"}>
-          <li className="flex items-center justify-center gap-1">
-            <EnvelopeIcon size={32} />
-            Contact
-          </li>
-        </Link>
-
-        <Link href={"/a-propos"}>
-          <li className="flex items-center justify-center gap-1">
-            <QuestionIcon size={32} />À Propos
-          </li>
-        </Link>
-      </ul>
     </footer>
   );
 }

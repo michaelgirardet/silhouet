@@ -31,21 +31,26 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
         if (f) onFile(f);
       }}
       className={[
-        "text-indigo bg-accent/5 hover:from-accent/20 hover:to-accent-5 rounded-lg font-semibold duration-300 ease-in-out hover:bg-gradient-to-br",
-        "mx-auto w-3xl",
-        "min-h-[160px] sm:min-h-[190px] md:min-h-[220px]",
-        "p-5 text-center sm:p-6 md:p-8",
-        "flex flex-col items-center justify-center",
-        "transition hover:cursor-pointer",
-        drag ? "shadow-float border-accent-400" : "shadow-soft",
+        // Toile : zone Cendre, rayon 24, hairline Bruine en dashed
+        // (seule utilisation du dashed dans le système)
+        "bg-ash rounded-images border border-dashed",
+        drag ? "border-amber" : "border-haze",
+        "mx-auto w-full max-w-3xl",
+        "min-h-[220px] p-8 sm:p-10",
+        "flex flex-col items-center justify-center gap-3 text-center",
+        "transition-colors duration-150 hover:cursor-pointer",
       ].join(" ")}
     >
-      <div className="flex flex-col items-center justify-center text-base font-medium sm:text-lg">
-        <CloudArrowUpIcon size={32} />
-        Glissez votre image ici
+      <div aria-hidden className="text-ivory">
+        <CloudArrowUpIcon size={24} weight="light" />
       </div>
-      <div className="mt-1 text-xs opacity-70 sm:text-sm">
-        PNG, JPG, WebP — &lt; 25MB
+      <div className="text-body-sm text-slate">Glissez votre image ici</div>
+      <div className="text-micro text-stone">
+        PNG, JPG, WebP — jusqu&apos;à 25 Mo
+      </div>
+      <div className="text-micro text-stone mt-4">
+        Tout se passe dans votre navigateur — aucune image envoyée sur un
+        serveur
       </div>
       <label htmlFor="glissez-image" aria-label="glissez-image">
         <input

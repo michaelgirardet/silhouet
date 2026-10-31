@@ -1,21 +1,30 @@
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import { Manrope } from "next/font/google";
-import { ThemeProvider } from "next-themes";
+import { Inter, Space_Grotesk } from "next/font/google";
 
-const manrope = Manrope({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-manrope",
+  weight: ["500"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Silhouet",
   description: "Révélez la forme, oubliez l'arrière-plan.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#121014",
 };
 
 export default async function RootLayout({
@@ -27,22 +36,15 @@ export default async function RootLayout({
   // pour que Next.js injecte le nonce CSP (généré dans le middleware) dans
   // ses scripts inline. Un rendu statique servi depuis le cache ne peut pas
   // recevoir de nonce par requête.
-  const nonce = (await headers()).get("x-nonce") ?? undefined;
+  await headers();
   return (
-    <html lang="fr" className={manrope.variable} suppressHydrationWarning>
+    <html lang="fr" className={`${spaceGrotesk.variable} ${inter.variable}`}>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          disableTransitionOnChange
-          nonce={nonce}
-        >
-          <div className="flex min-h-screen flex-col justify-between">
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-          </div>
-        </ThemeProvider>
+        <div className="flex min-h-screen flex-col justify-between">
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

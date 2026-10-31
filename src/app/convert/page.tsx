@@ -1,6 +1,6 @@
 "use client";
 
-import { DownloadSimpleIcon } from "@phosphor-icons/react";
+import { DownloadSimpleIcon, RepeatIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Dropzone from "@/app/components/Dropzone";
@@ -72,71 +72,73 @@ export default function ConvertImages() {
   };
 
   return (
-    <section className="flex w-full flex-col items-center justify-center">
-      <div className="shadow-soft rounded-lg p-6 text-center text-2xl md:text-left">
-        <h1 className="mb-1 text-3xl font-bold">Convertir en WebP</h1>
-        <p className="text-base opacity-80 sm:text-lg">
+    <section className="mx-auto flex w-full max-w-page flex-col items-center gap-12 px-6 py-16 md:py-24">
+      <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
+        <h1 className="text-ivory font-display text-heading-lg font-medium">
+          Convertir en WebP
+        </h1>
+        <p className="text-body-sm text-stone">
           Convertissez vos images PNG, JPG, GIF en WebP en un clic, sans perte
           visible de qualité.
         </p>
       </div>
 
-      <div className="content-center md:col-span-2">
+      <div className="flex w-full flex-col items-center justify-center gap-8">
         <Dropzone onFile={process} />
-        <div className="mt-24 flex w-full items-center justify-center">
-          {busy && <Loader />}
-        </div>
+        {busy && <Loader label="Conversion locale en cours" />}
       </div>
 
       {error && (
-        <div className="border-border rounded-md border p-3 text-sm text-[color:var(--color-danger,oklch(0.6_0.2_25))] md:col-span-2">
-          <p>Une erreur est survenue : {error}</p>
+        <div className="bg-ash rounded-inputs border-haze/60 w-full max-w-3xl border p-3 text-caption text-slate">
+          <p>{error}</p>
         </div>
       )}
 
       {/* Résultat */}
       {srcURL && (
-        <div className="mx-auto grid max-w-[768px] grid-cols-1 gap-4 sm:grid-cols-2">
-          <div>
-            <div className="mb-1 text-sm font-medium opacity-80">Source</div>
+        <div className="bg-soot rounded-cards grid w-full max-w-4xl grid-cols-1 gap-4 border border-white/6 p-4 sm:grid-cols-2 md:p-6">
+          <figure className="flex flex-col gap-2">
+            <figcaption className="text-micro text-stone">Source</figcaption>
             <Image
               src={srcURL}
               alt="source"
-              className="border-border block h-auto w-full rounded-lg border"
+              className="rounded-images h-auto w-full border border-white/6"
               width={800}
               height={800}
             />
-          </div>
+          </figure>
 
           {outURL && (
-            <div className="mx-auto max-w-[80%]">
-              <div className="mb-1 text-sm font-medium opacity-80">
-                Résultat (WebP)
-              </div>
-              <div className="u-checker border-indigo rounded-lg border p-2">
-                <Image
-                  src={outURL}
-                  alt="résultat WebP"
-                  className="block h-auto w-full rounded-md"
-                  width={800}
-                  height={800}
-                />
-              </div>
-              <div className="grid grid-cols-1 items-center justify-center gap-8 md:grid-cols-2">
+            <div className="flex flex-col gap-4">
+              <figure className="flex flex-col gap-2">
+                <figcaption className="text-micro text-stone">
+                  Résultat (WebP)
+                </figcaption>
+                <div className="checker rounded-images halo-reveal border border-white/6 p-2">
+                  <Image
+                    src={outURL}
+                    alt="résultat WebP"
+                    className="block h-auto w-full"
+                    width={800}
+                    height={800}
+                  />
+                </div>
+              </figure>
+              <div className="flex flex-col items-center justify-center gap-2 sm:flex-row">
                 <a
                   href={outURL}
                   download="converted.webp"
-                  className="bg-indigo md:text-md hover:bg-indigo/80 mt-4 flex cursor-pointer items-center justify-center gap-4 rounded-md px-4 py-2 text-sm font-medium text-white transition duration-300 ease-in-out"
+                  className="bg-chalk text-canvas hover:bg-ivory inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-2.5 text-caption transition-colors duration-150"
                 >
-                  <DownloadSimpleIcon size={24} />
+                  <DownloadSimpleIcon size={20} weight="light" />
                   Télécharger le WebP
                 </a>
                 <button
                   type="button"
-                  className="md:text-md hover:text-indigo dark:hover:text-indigo-300 mt-3 cursor-pointer items-center justify-center gap-4 rounded-md border border-none bg-[var(--page-bg)] px-4 py-2 text-sm font-semibold transition duration-300 ease-in-out"
+                  className="border-haze text-slate hover:border-stone hover:text-ivory inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-caption transition-colors duration-150"
                   onClick={reset}
                 >
-                  ↺ Recommencer
+                  <RepeatIcon size={20} weight="light" /> Réessayer
                 </button>
               </div>
             </div>
