@@ -21,6 +21,10 @@ type ExtendedWindow = Window & {
   cancelIdleCallback?: (handle: number) => void;
 };
 
+// Version du paquet de données @imgly/background-removal-data servi dans
+// public/models/<version>/ — doit correspondre au dossier extrait.
+const MODELS_VERSION = "1.7.0";
+
 export default function RemoveBgPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -88,9 +92,13 @@ export default function RemoveBgPage() {
       }
 
       // Utilise l’appel optionnel + garde
-      // publicPath doit être une URL absolue : la lib fait new URL(nom, publicPath)
+      // publicPath doit être une URL absolue (la lib fait new URL(nom, publicPath))
+      // et le chemin est versionné : chaque upgrade du paquet de données
+      // @imgly/background-removal-data change d'URL, ce qui permet un cache
+      // immutable sans risque de péremption.
       const config = {
-        publicPath: new URL("/models/", window.location.origin).href,
+        publicPath: new URL(`/models/${MODELS_VERSION}/`, window.location.origin)
+          .href,
         output: { format: "image/png" as const },
       };
       const result = await removerRef.current?.(prepared, config);

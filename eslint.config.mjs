@@ -18,6 +18,8 @@ const eslintConfig = [
 			"out/**",
 			"build/**",
 			"next-env.d.ts",
+			// Script e2e Node CommonJS, hors périmètre du lint applicatif
+			"scripts/**",
 		],
 	},
 ];
