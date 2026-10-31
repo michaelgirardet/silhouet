@@ -38,21 +38,25 @@ export default function RemoveBgPage() {
   useEffect(() => {
     const w = window as ExtendedWindow;
 
-    const idleId = w.requestIdleCallback?.(
-      () => {
-        import("@imgly/background-removal")
-          .then((m) => {
-            removerRef.current = m.removeBackground;
-          })
-          .catch(() => {});
-      },
-      { timeout: 1500 },
-    );
+    const preload = () => {
+      import("@imgly/background-removal")
+        .then((m) => {
+          removerRef.current = m.removeBackground;
+        })
+        .catch(() => {});
+    };
 
-    return () => {
-      if (idleId !== undefined) {
+    // Safari ne fournit pas requestIdleCallback : fallback setTimeout
+    if (w.requestIdleCallback) {
+      const idleId = w.requestIdleCallback(preload, { timeout: 1500 });
+      return () => {
         w.cancelIdleCallback?.(idleId);
-      }
+      };
+    }
+
+    const timerId = window.setTimeout(preload, 2000);
+    return () => {
+      window.clearTimeout(timerId);
     };
   }, []);
 
@@ -85,9 +89,11 @@ export default function RemoveBgPage() {
       }
 
       // Utilise l’appel optionnel + garde
-      const result = await removerRef.current?.(prepared, {
-        output: { format: "image/png" },
-      });
+      const config = {
+        publicPath: "/models/",
+        output: { format: "image/png" as const },
+      };
+      const result = await removerRef.current?.(prepared, config);
 
       if (!result) {
         throw new Error("Le moteur de détourage n'est pas disponible.");
