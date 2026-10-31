@@ -29,8 +29,6 @@ export default function ConvertImages() {
 
     setBusy(true);
     setError(null);
-    setSrcURL(null);
-    setOutURL(null);
 
     const objectUrl = URL.createObjectURL(file);
     const img = document.createElement("img");

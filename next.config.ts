@@ -20,6 +20,19 @@ const nextConfig: NextConfig = {
 					},
 				],
 			},
+			{
+				// Assets du moteur de détourage : noms hashés par contenu,
+				// donc cachables durablement. Indispensable pour que le
+				// détourage fonctionne hors-ligne après un premier chargement
+				// (sinon max-age=0 force une revalidation réseau).
+				source: "/models/:path*",
+				headers: [
+					{
+						key: "Cache-Control",
+						value: "public, max-age=31536000, immutable",
+					},
+				],
+			},
 		];
 	},
 };

@@ -76,7 +76,6 @@ export default function RemoveBgPage() {
 
     setBusy(true);
     setError(null);
-    setOutURL(null);
     try {
       const down = await downscaleImage(file, 2000);
       const prepared = down.size
@@ -89,8 +88,9 @@ export default function RemoveBgPage() {
       }
 
       // Utilise l’appel optionnel + garde
+      // publicPath doit être une URL absolue : la lib fait new URL(nom, publicPath)
       const config = {
-        publicPath: "/models/",
+        publicPath: new URL("/models/", window.location.origin).href,
         output: { format: "image/png" as const },
       };
       const result = await removerRef.current?.(prepared, config);

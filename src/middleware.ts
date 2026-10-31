@@ -9,15 +9,18 @@ export function middleware(request: NextRequest) {
 
 	const isDev = process.env.NODE_ENV === "development";
 
-	// blob: et 'wasm-unsafe-eval' sont nécessaires au moteur de détourage :
-	// @imgly/background-removal reconstruit le module .mjs et le binaire
-	// .wasm d'onnxruntime-web depuis /models/ en URLs blob:, puis onnxruntime
-	// les importe et compile le WASM en mode multi-thread (workers blob:).
-	// Aucun de ces schémas ne permet une requête vers un domaine tiers :
-	// connect-src 'self' blob: reste confiné à l'origine et au contenu local.
+	// CSP fonctionnelle pour le moteur de détourage :
+	// - blob: : la lib reconstruit .mjs et .wasm d'onnxruntime-web depuis
+	//   /models/ en URLs blob: (imports, workers et fetch blob).
+	// - 'wasm-unsafe-eval' : compilation WebAssembly du binaire reconstruit.
+	// - 'unsafe-eval' : la dépendance ndarray du moteur génère du code JS par
+	//   string (Function(...)) à l'initialisation. Sans elle, EvalError.
+	// Aucun de ces assouplissements n'ouvre le réseau : connect-src/img-src/
+	// default-src restent confinés à l'origine et au contenu local blob:, et
+	// les scripts ne peuvent pas joindre de domaine tiers.
 	const csp = [
 		"default-src 'self'",
-		`script-src 'self' 'nonce-${nonce}' 'wasm-unsafe-eval' blob:${isDev ? " 'unsafe-eval'" : ""}`,
+		`script-src 'self' 'nonce-${nonce}' 'unsafe-eval' 'wasm-unsafe-eval' blob:${isDev ? " 'unsafe-eval'" : ""}`,
 		"style-src 'self' 'unsafe-inline'",
 		"img-src 'self' blob: data:",
 		"connect-src 'self' blob:",

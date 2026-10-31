@@ -63,10 +63,24 @@ body {
   animation: slidein 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Damier pour visualiser la transparence, sans asset externe */
 .bg-background-remover {
-  background-image: url("/images/bg_transparent.webp");
-  background-repeat: repeat;
-  background-size: contain;
+  background-image: conic-gradient(
+    #e8e8ea 25%,
+    #fcfcfe 0 50%,
+    #e8e8ea 0 75%,
+    #fcfcfe 0
+  );
+  background-size: 16px 16px;
+}
+
+.dark .bg-background-remover {
+  background-image: conic-gradient(
+    #2b2e38 25%,
+    #20222b 0 50%,
+    #2b2e38 0 75%,
+    #20222b 0
+  );
 }
 
 /* Hero  Title  */
