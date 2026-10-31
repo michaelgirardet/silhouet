@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import Dropzone from "@/app/components/Dropzone";
 import Modal from "@/app/components/Modal";
-import { downscaleImage, fileFromBlob } from "@/lib/image";
+import { downscaleImage, fileFromBlob, validateImageFile } from "@/lib/image";
 import Loader from "../components/Loader";
 
 // Récupère le type exact de la fonction removeBackground
@@ -20,6 +20,10 @@ type ExtendedWindow = Window & {
   ) => number;
   cancelIdleCallback?: (handle: number) => void;
 };
+
+// Version du paquet de données @imgly/background-removal-data servi dans
+// public/models/<version>/ — doit correspondre au dossier extrait.
+const MODELS_VERSION = "1.7.0";
 
 export default function RemoveBgPage() {
   const [busy, setBusy] = useState(false);
@@ -38,28 +42,44 @@ export default function RemoveBgPage() {
   useEffect(() => {
     const w = window as ExtendedWindow;
 
-    const idleId = w.requestIdleCallback?.(
-      () => {
-        import("@imgly/background-removal")
-          .then((m) => {
-            removerRef.current = m.removeBackground;
-          })
-          .catch(() => {});
-      },
-      { timeout: 1500 },
-    );
+    const preload = () => {
+      import("@imgly/background-removal")
+        .then((m) => {
+          removerRef.current = m.removeBackground;
+        })
+        .catch(() => {});
+    };
 
-    return () => {
-      if (idleId !== undefined) {
+    // Safari ne fournit pas requestIdleCallback : fallback setTimeout
+    if (w.requestIdleCallback) {
+      const idleId = w.requestIdleCallback(preload, { timeout: 1500 });
+      return () => {
         w.cancelIdleCallback?.(idleId);
-      }
+      };
+    }
+
+    const timerId = window.setTimeout(preload, 2000);
+    return () => {
+      window.clearTimeout(timerId);
     };
   }, []);
 
+  useEffect(() => {
+    return () => {
+      if (srcURL) URL.revokeObjectURL(srcURL);
+      if (outURL) URL.revokeObjectURL(outURL);
+    };
+  }, [srcURL, outURL]);
+
   async function process(file: File) {
+    const validationError = validateImageFile(file);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     setBusy(true);
     setError(null);
-    setOutURL(null);
     try {
       const down = await downscaleImage(file, 2000);
       const prepared = down.size
@@ -72,9 +92,16 @@ export default function RemoveBgPage() {
       }
 
       // Utilise l’appel optionnel + garde
-      const result = await removerRef.current?.(prepared, {
-        output: { format: "image/png" },
-      });
+      // publicPath doit être une URL absolue (la lib fait new URL(nom, publicPath))
+      // et le chemin est versionné : chaque upgrade du paquet de données
+      // @imgly/background-removal-data change d'URL, ce qui permet un cache
+      // immutable sans risque de péremption.
+      const config = {
+        publicPath: new URL(`/models/${MODELS_VERSION}/`, window.location.origin)
+          .href,
+        output: { format: "image/png" as const },
+      };
+      const result = await removerRef.current?.(prepared, config);
 
       if (!result) {
         throw new Error("Le moteur de détourage n'est pas disponible.");
@@ -142,16 +169,20 @@ export default function RemoveBgPage() {
               <div className="mb-1 text-sm font-medium opacity-80">
                 Résultat
               </div>
-              <div className="u-checker border-indigo rounded-lg border p-2">
+              <button
+                type="button"
+                onClick={openModale}
+                aria-label="Agrandir le résultat"
+                className="u-checker border-indigo block w-full cursor-pointer rounded-lg border p-2"
+              >
                 <Image
                   src={outURL}
                   alt="résultat"
-                  className="block h-auto w-full cursor-pointer rounded-md"
+                  className="block h-auto w-full rounded-md"
                   width={800}
                   height={800}
-                  onClick={openModale}
                 />
-              </div>
+              </button>
             </div>
           )}
         </div>
@@ -169,7 +200,7 @@ export default function RemoveBgPage() {
                 <a
                   href={outURL}
                   download="silhouet-no-bg.png"
-                  className="md:text-mdflex bg-accent flex cursor-pointer items-center justify-center gap-4 rounded-md px-4 py-2 text-sm font-semibold text-white transition duration-300 ease-in-out"
+                  className="md:text-md flex bg-accent cursor-pointer items-center justify-center gap-4 rounded-md px-4 py-2 text-sm font-semibold text-white transition duration-300 ease-in-out"
                 >
                   <DownloadSimpleIcon size={24} />
                   Télécharger le PNG
@@ -177,7 +208,7 @@ export default function RemoveBgPage() {
               )}
               <button
                 type="button"
-                className="md:text-md flex cursor-pointer items-center justify-center gap-4 rounded-md border border-none bg-white px-4 py-2 text-sm font-semibold transition duration-300 ease-in-out hover:text-black/80"
+                className="md:text-md flex cursor-pointer items-center justify-center gap-4 rounded-md border border-none bg-[var(--page-bg)] px-4 py-2 text-sm font-semibold transition duration-300 ease-in-out hover:text-black/80 dark:hover:text-white/80"
                 onClick={() => {
                   setSrcURL(null);
                   setOutURL(null);

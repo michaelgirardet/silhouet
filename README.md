@@ -49,7 +49,7 @@ Le traitement est effectué localement dans le navigateur grâce à WebAssembly 
 ### 1. Cloner le dépôt
 
 ```bash
-git clone https://github.com/ton-pseudo/silhouet.git
+git clone https://github.com/michaelgirardet/silhouet.git
 cd silhouet
 ```
 
@@ -66,6 +66,19 @@ npm run dev
 ```
 
 L’application sera disponible sur http://localhost:3000
+
+## Validation de la promesse « privacy-first »
+
+La promesse « vos images ne quittent jamais votre machine » est vérifiée par
+un protocole e2e (voir [docs/protocole-validation.md](docs/protocole-validation.md)) :
+aucune requête vers un domaine tiers, moteur de détourage entièrement
+self-hosté, fonctionnement hors-ligne après un premier chargement, zéro
+violation CSP. Il tourne automatiquement en CI à chaque push/PR.
+
+```bash
+npm run build && npm run start
+node scripts/e2e/validate.js
+```
 
 Ce projet a été développé dans un but d’apprentissage et de démonstration technique.
 Il illustre la mise en œuvre de traitement d’image en local dans le navigateur, avec une attention particulière portée à la simplicité d’usage, à la performance et à la protection des données.

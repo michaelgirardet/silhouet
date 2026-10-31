@@ -9,6 +9,8 @@ export default function Dropzone({ onFile }: { onFile: (f: File) => void }) {
 
   return (
     <div
+      role="button"
+      tabIndex={0}
       aria-label="Déposez une image ou cliquez pour sélectionner un fichier"
       onClick={() => inputRef.current?.click()}
       onKeyDown={(e) => {

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="text-grey flex h-16 items-center justify-evenly gap-24 py-2 text-sm">
+    <footer className="text-grey dark:text-[#98a1a9] flex h-16 items-center justify-evenly gap-24 py-2 text-sm">
       <div className="flex">
         <p>Crédit Photo: </p>
         <a

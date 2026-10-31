@@ -1,0 +1,51 @@
+name: Validation e2e
+
+on:
+  push:
+    branches: [dev, master]
+  pull_request:
+    branches: [dev, master]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Cache Chrome (puppeteer)
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/puppeteer
+          key: puppeteer-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build de production
+        run: npm run build
+
+      - name: Démarrer le serveur de production
+        run: |
+          nohup npx next start -p 3000 > server.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -sf http://localhost:3000/ > /dev/null && echo "serveur prêt" && exit 0
+            sleep 2
+          done
+          echo "le serveur n'a pas démarré" && cat server.log && exit 1
+
+      - name: Validation privacy e2e (protocole docs/protocole-validation.md)
+        run: node scripts/e2e/validate.js
+        env:
+          BASE_URL: http://localhost:3000
+
+      - name: Logs serveur en cas d'échec
+        if: failure()
+        run: tail -100 server.log

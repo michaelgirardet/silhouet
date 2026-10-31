@@ -1,3 +1,17 @@
+export const MAX_FILE_BYTES = 25 * 1024 * 1024;
+
+export const ACCEPTED_TYPES = ["image/png", "image/jpeg", "image/webp", "image/gif"];
+
+export function validateImageFile(file: File): string | null {
+	if (!file.type.startsWith("image/")) {
+		return "Le fichier sélectionné n'est pas une image.";
+	}
+	if (file.size > MAX_FILE_BYTES) {
+		return "L'image dépasse la limite de 25 Mo.";
+	}
+	return null;
+}
+
 export async function downscaleImage(
 	file: File,
 	maxSide = 2000,
